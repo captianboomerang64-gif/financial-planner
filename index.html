@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pocket Planner Pro - Fixed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --sub-text: #666;
+            --card: #f3f4f6;
+            --primary: #000000;
+            --accent-green: #d7e97a;
+            --accent-purple: #c8bdf2;
+            --danger: #ff4d4d;
+            --nav-bg: #111111;
+            --radius: 20px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #000000;
+            --text: #ffffff;
+            --sub-text: #a0a0a0;
+            --card: #1c1c1e;
+            --primary: #ffffff;
+            --nav-bg: #1c1c1e;
+            --accent-green: #c0d64d;
+            --accent-purple: #a899e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); transition: 0.3s; }
+        
+        .container { max-width: 430px; margin: auto; min-height: 100vh; position: relative; }
+        .view { display: none; padding: 20px; padding-bottom: 100px; animation: fadeIn 0.2s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Dashboard Items */
+        .balance-card { background: var(--primary); color: var(--bg); border-radius: var(--radius); padding: 25px; margin-bottom: 15px; }
+        .balance-card h1 { font-size: 32px; margin: 5px 0; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .stat-card { padding: 15px; border-radius: 18px; color: #000; }
+        .stat-card.inc { background: var(--accent-green); }
+        .stat-card.exp { background: var(--accent-purple); }
+
+        .budget-box { background: var(--card); padding: 15px; border-radius: 18px; margin-bottom: 15px; }
+        .progress-bg { background: #ddd; height: 6px; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .progress-fill { background: var(--accent-green); height: 100%; width: 0%; transition: 0.4s; }
+
+        /* Form Elements */
+        input, select, textarea { 
+            width: 100%; padding: 14px; border-radius: 12px; border: 1px solid transparent; 
+            background: var(--card); color: var(--text); margin-bottom: 10px; font-size: 15px;
+        }
+        input:focus { border-color: var(--accent-green); outline: none; }
+        .btn-main { width: 100%; padding: 16px; border-radius: 14px; border: none; background: var(--primary); color: var(--bg); font-weight: 700; cursor: pointer; }
+        .btn-sub { background: none; border: 1px solid var(--text); color: var(--text); margin-top: 10px; }
+
+        /* History List */
+        .tx-item { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .tx-details small { color: var(--sub-text); font-size: 11px; }
+        .tx-amt { font-weight: 700; }
+        .tx-amt.neg { color: var(--danger); }
+        .tx-amt.pos { color: #2ecc71; }
+
+        /* Calendar */
+        .cal-container { background: var(--card); padding: 15px; border-radius: 20px; }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+        .cal-day { padding: 10px 0; font-size: 13px; border-radius: 10px; cursor: pointer; position: relative; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+        .cal-day.today { background: var(--accent-green); color: #000; font-weight: bold; }
+        .cal-day.has-tx::after { content: ''; position: absolute; bottom: 4px; width: 4px; height: 4px; background: currentColor; border-radius: 50%; }
+        .cal-header { display: flex; justify-content: space-between; padding: 10px; font-weight: 700; }
+
+        /* Navigation */
+        nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--nav-bg); border-radius: 30px; display: flex; justify-content: space-around; padding: 12px; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        nav span { font-size: 20px; cursor: pointer; opacity: 0.4; transition: 0.3s; }
+        nav span.active { opacity: 1; transform: translateY(-3px); }
+
+        .avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-green); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Login View -->
+    <div id="view-auth" class="view active" style="text-align: center; padding-top: 80px;">
+        <h1 style="font-size: 36px; margin-bottom: 40px;">Pocket Planner</h1>
+        <div style="background: var(--card); padding: 25px; border-radius: 24px;">
+            <h3 id="auth-label">Login</h3><br>
+            <input type="text" id="login-user" placeholder="Username">
+            <input type="password" id="login-pin" placeholder="4-Digit PIN">
+            <button class="btn-main" onclick="handleAuth()">Sign In</button>
+            <p onclick="toggleAuth()" id="auth-toggle" style="margin-top:20px; font-size: 13px; cursor: pointer;">New user? Register</p>
+        </div>
+    </div>
+
+    <!-- Home View -->
+    <div id="view-home" class="view">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky" id="user-img" class="avatar" onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" hidden accept="image/*">
+            <div style="text-align: right;"><small>Welcome back,</small><div id="display-name" style="font-weight:700">User</div></div>
+        </header>
+
+        <div class="balance-card">
+            <small>Total Balance</small>
+            <h1 id="home-bal">₹0</h1>
+        </div>
+
+        <div class="budget-box">
+            <div style="display:flex; justify-content: space-between; font-size: 12px;">
+                <span>Monthly Budget Progress</span>
+                <span id="budget-text">0 / 0</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" id="budget-bar"></div></div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card inc"><small>Income</small><h3 id="home-inc">₹0</h3></div>
+            <div class="stat-card exp"><small>Expenses</small><h3 id="home-exp">₹0</h3></div>
+        </div>
+
+        <div class="budget-box">
+            <h3>Add Transaction</h3><br>
+            <div id="selected-date-label" style="font-size: 12px; color: var(--accent-purple); font-weight: 600; margin-bottom: 8px;">Date: Today</div>
+            <input type="text" id="in-desc" placeholder="What is this for?">
+            <input type="number" id="in-amt" placeholder="Amount">
+            <textarea id="in-note" placeholder="Notes (Optional)" rows="2"></textarea>
+            <select id="in-type">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+            </select>
+            <button class="btn-main" onclick="addTransaction()">Save Record</button>
+        </div>
+    </div>
+
+    <!-- History View -->
+    <div id="view-tx" class="view">
+        <h2>History</h2><br>
+        <input type="text" id="search-tx" placeholder="Search transactions..." oninput="renderHistory()">
+        <div id="history-list"></div>
+    </div>
+
+    <!-- Calendar View -->
+    <div id="view-cal" class="view">
+        <h2>Calendar</h2>
+        <p style="font-size: 12px; color: var(--sub-text); margin-bottom: 15px;">Tap a date to set a transaction for that day</p>
+        <div class="cal-container">
+            <div class="cal-header"><span id="cal-title">Month Year</span></div>
+            <div class="cal-grid" style="opacity: 0.5; font-size: 11px; margin-bottom: 5px;">
+                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
+            <div class="cal-grid" id="cal-days"></div>
+        </div>
+    </div>
+
+    <!-- Stats View -->
+    <div id="view-stats" class="view">
+        <h2>Analytics</h2><br>
+        <div class="budget-box"><canvas id="mainChart"></canvas></div>
+        <div class="stat-grid">
+            <div class="budget-box" style="margin:0; text-align:center"><small>Avg/Day</small><h3 id="stat-avg">₹0</h3></div>
+            <div class="budget-box" style="margin:0; text-align:center"><small>Total Tx</small><h3 id="stat-count">0</h3></div>
+        </div>
+    </div>
+
+    <!-- Settings View -->
+    <div id="view-settings" class="view">
+        <h2>Settings</h2><br>
+        <div class="budget-box">
+            <p>Monthly Budget Limit</p>
+            <input type="number" id="set-limit" placeholder="e.g. 10000" style="margin-top:10px">
+            <button class="btn-main" onclick="saveLimit()">Update Limit</button>
+            <hr style="margin:20px 0; opacity: 0.1;">
+            <p>Appearance</p>
+            <div style="display: flex; gap: 10px; margin-top:10px">
+                <button class="btn-main btn-sub" onclick="applyTheme('light')">Light</button>
+                <button class="btn-main btn-sub" onclick="applyTheme('dark')">Dark</button>
+            </div>
+            <hr style="margin:20px 0; opacity: 0.1;">
+            <button class="btn-main btn-sub" onclick="exportPDF()">📄 Download PDF Report</button>
+            <button class="btn-main" onclick="logout()" style="margin-top:20px; background:var(--danger)">Logout</button>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav id="main-nav" style="display: none;">
+        <span onclick="showView('home')" class="nav-i active">🏠</span>
+        <span onclick="showView('tx')" class="nav-i">📜</span>
+        <span onclick="showView('cal')" class="nav-i">📅</span>
+        <span onclick="showView('stats')" class="nav-i">📊</span>
+        <span onclick="showView('settings')" class="nav-i">⚙️</span>
+    </nav>
+
+</div>
+
+<script>
+    // --- App State ---
+    let users = JSON.parse(localStorage.getItem('pp_pro_data') || '{}');
+    let currentUser = localStorage.getItem('pp_pro_user') || null;
+    let selectedDate = new Date().toLocaleDateString();
+    let isRegisterMode = false;
+    let chartInstance = null;
+
+    // --- Authentication ---
+    function toggleAuth() {
+        isRegisterMode = !isRegisterMode;
+        document.getElementById('auth-label').innerText = isRegisterMode ? 'Register' : 'Login';
+        document.getElementById('auth-toggle').innerText = isRegisterMode ? 'Already have account? Login' : 'New user? Register';
+    }
+
+    function handleAuth() {
+        const u = document.getElementById('login-user').value.trim();
+        const p = document.getElementById('login-pin').value.trim();
+        if(!u || p.length < 4) return alert("Enter username & 4-digit PIN");
+
+        if(isRegisterMode) {
+            if(users[u]) return alert("Username taken");
+            users[u] = { pin: p, txs: [], budget: 5000, theme: 'light', avatar: '' };
+            save();
+            alert("Registered! Now Login.");
+            toggleAuth();
+        } else {
+            if(users[u] && users[u].pin === p) {
+                currentUser = u;
+                localStorage.setItem('pp_pro_user', u);
+                startApp();
+            } else alert("Invalid credentials");
+        }
+    }
+
+    function logout() { currentUser = null; localStorage.removeItem('pp_pro_user'); location.reload(); }
+    function save() { localStorage.setItem('pp_pro_data', JSON.stringify(users)); }
+
+    // --- Navigation ---
+    function showView(id) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById('view-' + id).classList.add('active');
+        document.querySelectorAll('.nav-i').forEach(n => n.classList.remove('active'));
+        const map = { home:0, tx:1, cal:2, stats:3, settings:4 };
+        document.querySelectorAll('.nav-i')[map[id]].classList.add('active');
+
+        if(id === 'home') updateHome();
+        if(id === 'tx') renderHistory();
+        if(id === 'cal') renderCalendar();
+        if(id === 'stats') renderStats();
+    }
+
+    // --- Core Logic ---
+    function startApp() {
+        document.getElementById('view-auth').classList.remove('active');
+        document.getElementById('main-nav').style.display = 'flex';
+        document.getElementById('display-name').innerText = currentUser;
+        
+        const data = users[currentUser];
+        if(data.theme) applyTheme(data.theme);
+        if(data.avatar) document.getElementById('user-img').src = data.avatar;
+        document.getElementById('set-limit').value = data.budget;
+        
+        showView('home');
+    }
+
+    function updateHome() {
+        const data = users[currentUser];
+        let inc = 0, exp = 0;
+        data.txs.forEach(t => t.type === 'income' ? inc += t.amt : exp += t.amt);
+        
+        document.getElementById('home-bal').innerText = `₹${(inc-exp).toLocaleString()}`;
+        document.getElementById('home-inc').innerText = `₹${inc.toLocaleString()}`;
+        document.getElementById('home-exp').innerText = `₹${exp.toLocaleString()}`;
+
+        const limit = data.budget || 1;
+        const perc = Math.min((exp / limit) * 100, 100);
+        document.getElementById('budget-bar').style.width = perc + '%';
+        document.getElementById('budget-text').innerText = `₹${exp} / ₹${limit}`;
+        document.getElementById('budget-bar').style.background = perc > 90 ? 'var(--danger)' : 'var(--accent-green)';
+    }
+
+    function addTransaction() {
+        const desc = document.getElementById('in-desc').value.trim();
+        const amt = parseFloat(document.getElementById('in-amt').value);
+        const type = document.getElementById('in-type').value;
+        const note = document.getElementById('in-note').value.trim();
+
+        if(!desc || isNaN(amt)) return alert("Enter valid description and amount");
+
+        const newTx = { id: Date.now(), desc, amt, type, note, date: selectedDate };
+        
+        // Safety check to ensure txs array exists
+        if(!users[currentUser].txs) users[currentUser].txs = [];
+        
+        users[currentUser].txs.push(newTx);
+        save();
+        
+        // Reset fields
+        document.getElementById('in-desc').value = '';
+        document.getElementById('in-amt').value = '';
+        document.getElementById('in-note').value = '';
+        selectedDate = new Date().toLocaleDateString();
+        document.getElementById('selected-date-label').innerText = "Date: Today";
+        
+        updateHome();
+        alert("Transaction Saved!");
+    }
+
+    function renderHistory() {
+        const list = document.getElementById('history-list');
+        const search = document.getElementById('search-tx').value.toLowerCase();
+        list.innerHTML = '';
+        
+        const filtered = users[currentUser].txs.filter(t => t.desc.toLowerCase().includes(search)).reverse();
+
+        filtered.forEach(t => {
+            list.innerHTML += `
+                <div class="tx-item">
+                    <div class="tx-details">
+                        <strong>${t.desc}</strong><br>
+                        <small>${t.date} ${t.note ? '• ' + t.note : ''}</small>
+                    </div>
+                    <div class="tx-amt ${t.type==='expense'?'neg':'pos'}">
+                        ${t.type==='expense'?'-':'+'}₹${t.amt}
+                        <div onclick="deleteTx(${t.id})" style="font-size:10px; color:red; cursor:pointer; text-align:right">Delete</div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function deleteTx(id) {
+        if(confirm("Delete this entry?")) {
+            users[currentUser].txs = users[currentUser].txs.filter(t => t.id !== id);
+            save();
+            renderHistory();
+            updateHome();
+        }
+    }
+
+    // --- Calendar ---
+    function renderCalendar() {
+        const grid = document.getElementById('cal-days');
+        const now = new Date();
+        document.getElementById('cal-title').innerText = now.toLocaleString('default', { month: 'long', year: 'numeric' });
+        
+        const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+        const totalDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+        grid.innerHTML = '';
+        for(let i=0; i<firstDay; i++) grid.innerHTML += '<div></div>';
+        
+        for(let d=1; d<=totalDays; d++) {
+            const dStr = new Date(now.getFullYear(), now.getMonth(), d).toLocaleDateString();
+            const hasActivity = users[currentUser].txs.some(t => t.date === dStr);
+            const isToday = d === now.getDate() ? 'today' : '';
+            
+            grid.innerHTML += `
+                <div class="cal-day ${isToday} ${hasActivity ? 'has-tx' : ''}" onclick="pickDate('${dStr}', ${d})">
+                    ${d}
+                </div>
+            `;
+        }
+    }
+
+    function pickDate(fullDate, dayNum) {
+        selectedDate = fullDate;
+        document.getElementById('selected-date-label').innerText = "Date Selected: " + dayNum;
+        showView('home');
+    }
+
+    // --- Stats ---
+    function renderStats() {
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        let inc = 0, exp = 0;
+        users[currentUser].txs.forEach(t => t.type === 'income' ? inc += t.amt : exp += t.amt);
+
+        if(chartInstance) chartInstance.destroy();
+        chartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Income', 'Expense'],
+                datasets: [{
+                    data: [inc, exp],
+                    backgroundColor: ['#d7e97a', '#c8bdf2'],
+                    borderWidth: 0
+                }]
+            },
+            options: { cutout: '75%', plugins: { legend: { position: 'bottom' } } }
+        });
+
+        document.getElementById('stat-avg').innerText = `₹${(exp / 30).toFixed(0)}`;
+        document.getElementById('stat-count').innerText = users[currentUser].txs.length;
+    }
+
+    // --- Settings Helpers ---
+    function saveLimit() {
+        users[currentUser].budget = parseFloat(document.getElementById('set-limit').value) || 0;
+        save();
+        alert("Budget goal updated!");
+    }
+
+    function applyTheme(t) {
+        document.documentElement.setAttribute('data-theme', t);
+        users[currentUser].theme = t;
+        save();
+    }
+
+    async function exportPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text(`Financial Report: ${currentUser}`, 14, 15);
+        const rows = users[currentUser].txs.map(t => [t.date, t.desc, t.type, t.amt]);
+        doc.autoTable({ head: [['Date', 'Description', 'Type', 'Amount']], body: rows, startY: 25 });
+        doc.save('PocketPlanner_Report.pdf');
+    }
+
+    document.getElementById('file-input').onchange = function(e) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            users[currentUser].avatar = reader.result;
+            document.getElementById('user-img').src = reader.result;
+            save();
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+
+    // Bootstrap
+    if(currentUser) startApp();
+</script>
+</body>
+</html>
