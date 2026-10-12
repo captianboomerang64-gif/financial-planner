@@ -8,8 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all';this.onload=null;">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js" defer></script>
@@ -48,7 +47,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; color: var(--text); transition: background var(--transition), color var(--transition); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); line-height: 1.5; -webkit-font-smoothing: antialiased; }
         
         /* ---- RESPONSIVE LAYOUT ---- */
         .app-layout { display: flex; min-height: 100vh; }
@@ -71,8 +70,8 @@
         .sidebar-user-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-green); }
         .sidebar-user-name { font-size: 13px; font-weight: 600; color: #e2e8f0; }
         
-        .view { display: none; padding: 24px; padding-bottom: 100px; animation: fadeIn 0.25s ease; max-width: 720px; margin: 0 auto; content-visibility: auto; contain-intrinsic-size: 500px; }
-        .view.active { display: block; content-visibility: visible; }
+        .view { display: none; padding: 24px; padding-bottom: 100px; animation: fadeIn 0.25s ease; max-width: 720px; margin: 0 auto; }
+        .view.active { display: block; }
         .view-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 20px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -148,7 +147,7 @@
         .tx-details small { color: var(--sub-text); font-size: 11px; }
         .tx-amt { font-weight: 700; }
         .tx-amt.neg { color: var(--danger); }
-        .tx-amt.pos { color: var(--accent-green, #2ecc71); }
+        .tx-amt.pos { color: #2ecc71; }
 
         /* Calendar */
         .cal-container { background: var(--card); padding: 15px; border-radius: 20px; }
@@ -156,8 +155,8 @@
         .cal-day { padding: 10px 0; font-size: 13px; border-radius: 10px; cursor: pointer; position: relative; min-height: 40px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
         .cal-day.today { font-weight: bold; }
         .cal-day.has-both { background: #c8bdf2; color: #000; }
-        .cal-day.has-expense { background: var(--accent-purple, #7c3aed); color: #fff; }
-        .cal-day.has-income { background: var(--accent-green, #059669); color: #fff; }
+        .cal-day.has-expense { background: #ff4d4d; color: #fff; }
+        .cal-day.has-income { background: #2ecc71; color: #fff; }
         .cal-header { display: flex; justify-content: space-between; padding: 10px; font-weight: 700; }
 
         /* Investment Items */
@@ -333,6 +332,7 @@
         .avatar-suggestion.active { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary); }
         .avatar-suggestion img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
+
         .divider-text { display: flex; align-items: center; gap: 12px; margin: 20px 0 16px; color: var(--sub-text); font-size: 12px; font-weight: 600; }
         .divider-text::before, .divider-text::after { content: ''; flex: 1; height: 1px; background: var(--card); }
 
@@ -363,157 +363,6 @@
             .settings-tabs { gap: 8px; }
             .settings-tab { padding: 10px 20px; font-size: 14px; }
         }
-
-        /* ---- RESPONSIVENESS FIXES ---- */
-        body, .app-layout { overflow-x: hidden; }
-        img, canvas, video, svg { max-width: 100%; height: auto; }
-        input, select, textarea { max-width: 100%; }
-        .tx-item { word-break: break-word; overflow-wrap: break-word; }
-        .sub-item { word-break: break-word; overflow-wrap: break-word; gap: 8px; }
-        .sub-details { min-width: 0; overflow: hidden; }
-        .invest-item { word-break: break-word; overflow-wrap: break-word; }
-        .invest-amounts { gap: 8px; }
-        .goal-item { word-break: break-word; overflow-wrap: break-word; }
-        .budget-box { overflow-wrap: break-word; }
-        .stat-card { min-width: 0; }
-        .cal-container { overflow-x: hidden; }
-
-        @media (max-width: 480px) {
-            .view { padding: 16px; }
-            .view-title { font-size: 22px; }
-            .balance-card { padding: 20px; }
-            .balance-card h1 { font-size: 28px; }
-            .stat-card { padding: 12px; }
-            .stat-card h3 { font-size: 16px; }
-            .stat-card small { font-size: 11px; }
-            .stat-grid { gap: 8px; }
-            .cal-day { padding: 6px 0; min-height: 30px; font-size: 11px; }
-            .cal-grid { gap: 3px; }
-            .cal-header { padding: 8px 4px; font-size: 14px; }
-            .cal-grid:first-of-type { font-size: 10px; }
-            #cal-month-stats:not([style]) { flex-wrap: wrap; gap: 4px; }
-            .folder-stat-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .folder-tx-form .form-row { grid-template-columns: 1fr; }
-            .more-dropdown { right: 8px; min-width: 160px; }
-            .folder-detail-top { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .folder-detail-actions { width: 100%; justify-content: flex-start; }
-            .folder-detail-icon { font-size: 28px; }
-            .folder-detail-name { font-size: 18px; }
-            .invest-amounts { flex-direction: column; gap: 4px; }
-            .goal-stats { flex-direction: column; gap: 4px; font-size: 12px; }
-            .invest-item-header { flex-wrap: wrap; gap: 6px; }
-            .goal-header { flex-wrap: wrap; gap: 6px; }
-            .balance-card::before { width: 120px; height: 120px; }
-            .balance-card::after { width: 100px; height: 100px; }
-            #cal-month-stats span { white-space: nowrap; }
-            .sub-amount { font-size: 14px; }
-            .modal-content { padding: 20px 16px; }
-            .tx-amt { font-size: 14px; }
-            .tx-details small { font-size: 10px; }
-        }
-
-        @media (min-width: 481px) and (max-width: 767px) {
-            .stat-grid { grid-template-columns: repeat(3, 1fr); }
-            .view { max-width: 100%; }
-            .folder-stat-grid { grid-template-columns: 1fr 1fr 1fr; }
-            .folder-tx-form .form-row { grid-template-columns: 1fr 1fr; }
-            .cal-day { padding: 8px 0; min-height: 36px; font-size: 12px; }
-        }
-
-        @media (max-width: 360px) {
-            .bottom-nav-label { display: none; }
-            .view { padding: 12px; }
-            .view-title { font-size: 20px; }
-            .balance-card { padding: 16px; border-radius: 12px; }
-            .balance-card small { font-size: 12px; }
-            .balance-card h1 { font-size: 22px; }
-            .stat-card { padding: 10px; border-radius: 14px; }
-            .stat-card h3 { font-size: 14px; }
-            .budget-box { padding: 12px; border-radius: 14px; }
-            .cal-day { padding: 4px 0; min-height: 26px; font-size: 10px; }
-            .cal-grid { gap: 2px; }
-            .cal-container { padding: 10px; border-radius: 14px; }
-            .folder-stat-grid { grid-template-columns: 1fr; }
-            .folder-stat-card { padding: 10px; }
-            .folder-stat-card h4 { font-size: 16px; }
-            .tx-item { padding: 12px; border-radius: 12px; }
-            .sub-item { padding: 12px; border-radius: 12px; }
-            .invest-item { padding: 12px; border-radius: 12px; }
-            .goal-item { padding: 12px; border-radius: 12px; }
-            .folder-item { padding: 12px; border-radius: 12px; }
-            .tx-amt { font-size: 13px; }
-            .sub-amount { font-size: 13px; }
-            .card { padding: 16px; }
-            .modal-content { padding: 16px 12px; }
-            .form-label { font-size: 11px; }
-            input, select, textarea { padding: 12px; font-size: 14px; }
-            .btn-main { padding: 14px; font-size: 14px; }
-            .btn-small { padding: 6px 12px; font-size: 12px; }
-            .more-dropdown { right: 4px; left: 4px; min-width: auto; }
-            .more-dropdown-item { padding: 8px 12px; font-size: 13px; }
-            .view h3 { font-size: 16px; }
-            .settings-section { padding: 16px; }
-            .settings-tab { padding: 8px 14px; font-size: 12px; }
-        }
-
-        @media (max-width: 767px) {
-            .budget-box > div[style*="display:flex"]:not(.stat-grid) { flex-direction: column; }
-            .stat-card.inc h3, .stat-card.exp h3 { font-size: 18px; }
-            .tx-item { flex-wrap: wrap; gap: 6px; }
-            .sub-item { flex-wrap: wrap; }
-            .sub-info { min-width: 0; overflow: hidden; }
-            .folder-item { flex-wrap: wrap; gap: 8px; }
-            .folder-info { min-width: 0; overflow: hidden; }
-            .invest-actions { flex-wrap: wrap; }
-            .goal-actions { flex-wrap: wrap; }
-            .btn-group { flex-wrap: wrap; }
-            .folder-detail-actions { flex-wrap: wrap; }
-            .date-tx-header { flex-wrap: wrap; gap: 8px; }
-        }
-
-        /* ---- DARK MODE CONSISTENCY FIXES ---- */
-        [data-theme="dark"] .stat-card.invest,
-        [data-theme="dark"] .stat-card.invest h3,
-        [data-theme="dark"] .stat-card.invest small,
-        [data-theme="dark"] .stat-card.goal,
-        [data-theme="dark"] .stat-card.goal h3,
-        [data-theme="dark"] .stat-card.goal small { color: #fff; }
-        [data-theme="dark"] .stat-card.invest { background: #1a5276; }
-        [data-theme="dark"] .stat-card.goal { background: #7d6608; }
-        [data-theme="dark"] .progress-bg { background: #334155; }
-        [data-theme="dark"] .goal-progress-bar { background: #334155; }
-        [data-theme="dark"] .cal-day.has-both { background: #4a3f6b; color: #e2e8f0; }
-        [data-theme="dark"] #cal-month-stats { border-bottom-color: rgba(255,255,255,0.06); }
-        [data-theme="dark"] .cal-grid[style*="opacity: 0.5"] { opacity: 0.35 !important; }
-        [data-theme="dark"] .invest-type-badge { color: #1e293b; }
-        [data-theme="dark"] #view-invest .stat-card[style*="background: #90EE90"] { background: #1b5e20 !important; color: #fff !important; }
-        [data-theme="dark"] #view-goals .stat-card[style*="background: #FFA07A"] { background: #8b3a2a !important; color: #fff !important; }
-        [data-theme="dark"] .modal-overlay { background: rgba(0,0,0,0.7); }
-        [data-theme="dark"] .settings-tab.active { color: #fff; }
-        [data-theme="dark"] .mode-toggle-btn.active { color: #fff; }
-        [data-theme="dark"] .sidebar { color: #cbd5e1; }
-        [data-theme="dark"] .bottom-nav-item.active { color: #60a5fa; }
-        [data-theme="dark"] .bottom-nav-item.active::before { background: #60a5fa; }
-        [data-theme="dark"] .btn-main { color: #fff; }
-        [data-theme="dark"] .btn-small { color: #fff; }
-        [data-theme="dark"] .folder-type-tag { color: #a78bfa; }
-        [data-theme="dark"] .folder-chip.selected { background: rgba(59,130,246,0.25); border-color: var(--primary); color: var(--primary); }
-
-        /* ---- DARK MODE CALENDAR HOVER/ACTIVE STATES ---- */
-        [data-theme="dark"] .cal-day:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
-        [data-theme="dark"] .cal-day:active { transform: translateY(0px) scale(0.95); }
-        [data-theme="dark"] .cal-day.today { background: rgba(59,130,246,0.15); color: #93c5fd; font-weight: 700; box-shadow: inset 0 0 0 1.5px rgba(59,130,246,0.3); }
-        [data-theme="dark"] .cal-day.today:hover { background: rgba(59,130,246,0.25); }
-        [data-theme="dark"] .cal-day.has-income { background: rgba(52,211,153,0.2); color: #6ee7b7; }
-        [data-theme="dark"] .cal-day.has-income:hover { background: rgba(52,211,153,0.3); transform: translateY(-1px); }
-        [data-theme="dark"] .cal-day.has-expense { background: rgba(167,139,250,0.2); color: #c4b5fd; }
-        [data-theme="dark"] .cal-day.has-expense:hover { background: rgba(167,139,250,0.3); transform: translateY(-1px); }
-        [data-theme="dark"] .cal-day.has-both { background: #4a3f6b; color: #d8cdf0; }
-        [data-theme="dark"] .cal-day.has-both:hover { background: #5c4f82; transform: translateY(-1px); }
-        [data-theme="dark"] .cal-day:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }
-        [data-theme="dark"] .cal-day .day-tx-dot { transition: transform 0.15s ease; }
-        [data-theme="dark"] .cal-day:hover .day-tx-dot { transform: scale(1.3); }
-    </style>
 </head>
 <body>
 
@@ -547,15 +396,8 @@
             <button class="sidebar-item" onclick="showView('settings')" data-view="settings"><span class="sidebar-item-icon"><i class="fas fa-cog"></i></span><span>Settings</span></button>
         </nav>
         <div class="sidebar-footer">
-            <div style="display:flex; align-items:center; gap:4px; padding:0 8px; margin-bottom:8px;">
-                <button id="theme-quick-toggle" onclick="applyTheme(getCustom().theme === 'system' ? getSystemTheme() : (document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'))" 
-                        class="sidebar-item" style="flex:1; justify-content:center; padding:8px; font-size:13px;"
-                        aria-label="Toggle theme" title="Toggle theme">
-                    <i class="fas fa-moon"></i> <span style="font-size:11px; font-weight:500;">Theme</span>
-                </button>
-            </div>
-            <div class="sidebar-user" onclick="showView('settings')" style="margin-top:0;">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky" alt="User avatar" class="sidebar-user-avatar" id="sidebar-user-img" loading="lazy">
+            <div class="sidebar-user" onclick="showView('settings')">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky" alt="User avatar" class="sidebar-user-avatar" id="sidebar-user-img">
                 <span class="sidebar-user-name" id="sidebar-user-name">User</span>
             </div>
         </div>
@@ -598,10 +440,10 @@
                 <div id="display-name" style="font-weight:800; font-size:20px; letter-spacing:-0.02em;">User</div>
             </div>
             <div style="display:flex; align-items:center; gap:10px;">
-                <input type="file" id="file-input" hidden accept="image/*" onchange="handleProfileImageUpload(event)">
+                <input type="file" id="file-input" hidden accept="image/*">
                 <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky" alt="Profile avatar" id="user-img"
                      style="width:40px; height:40px; border-radius:50%; border:2px solid var(--accent-green); cursor:pointer; object-fit:cover;"
-                     onclick="document.getElementById('file-input').click()" role="button" tabindex="0" aria-label="Change profile picture" loading="lazy">
+                     onclick="document.getElementById('file-input').click()" role="button" tabindex="0" aria-label="Change profile picture">
             </div>
         </header>
 
@@ -674,8 +516,8 @@
     <!-- Calendar View -->
     <div id="view-cal" class="view" role="region" aria-label="Calendar">
         <h1 class="view-title"><i class="fas fa-calendar-alt"></i> Calendar</h1>            <div style="display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap;">
-            <small style="display:flex; align-items:center; gap:4px;"><span style="width:12px;height:12px;background:var(--accent-green,#2ecc71);border-radius:50%;display:inline-block;"></span> <i class="fas fa-arrow-up" style="font-size:10px; color:var(--accent-green,#2ecc71);"></i> Income</small>
-            <small style="display:flex; align-items:center; gap:4px;"><span style="width:12px;height:12px;background:var(--accent-purple,#ff4d4d);border-radius:50%;display:inline-block;"></span> <i class="fas fa-arrow-down" style="font-size:10px; color:var(--accent-purple,#ff4d4d);"></i> Expense</small>
+            <small style="display:flex; align-items:center; gap:4px;"><span style="width:12px;height:12px;background:#2ecc71;border-radius:50%;display:inline-block;"></span> <i class="fas fa-arrow-up" style="font-size:10px; color:#2ecc71;"></i> Income</small>
+            <small style="display:flex; align-items:center; gap:4px;"><span style="width:12px;height:12px;background:#ff4d4d;border-radius:50%;display:inline-block;"></span> <i class="fas fa-arrow-down" style="font-size:10px; color:#ff4d4d;"></i> Expense</small>
             <small style="display:flex; align-items:center; gap:4px;"><span style="width:12px;height:12px;background:#c8bdf2;border-radius:50%;display:inline-block;"></span> <i class="fas fa-exchange-alt" style="font-size:10px; color:#c8bdf2;"></i> Both</small>
         </div>
         <div class="cal-container">
@@ -685,8 +527,8 @@
                 <span style="cursor:pointer;" onclick="changeCalMonth(1)">▶</span>
             </div>
             <div id="cal-month-stats" style="display:flex; justify-content:space-between; padding:4px 10px 8px; font-size:11px; color:var(--sub-text); border-bottom:1px solid rgba(0,0,0,0.05); margin-bottom:8px;">
-                <span><i class="fas fa-arrow-up" style="color:var(--accent-green,#2ecc71); font-size:10px;"></i> Income: <strong id="cal-month-income" style="color:var(--accent-green,#2ecc71);">$0</strong></span>
-                <span><i class="fas fa-arrow-down" style="color:var(--accent-purple,var(--danger)); font-size:10px;"></i> Expenses: <strong id="cal-month-expense" style="color:var(--accent-purple,var(--danger));">$0</strong></span>
+                <span><i class="fas fa-arrow-up" style="color:#2ecc71; font-size:10px;"></i> Income: <strong id="cal-month-income" style="color:#2ecc71;">$0</strong></span>
+                <span><i class="fas fa-arrow-down" style="color:var(--danger); font-size:10px;"></i> Expenses: <strong id="cal-month-expense" style="color:var(--danger);">$0</strong></span>
                 <span>Net: <strong id="cal-month-net">$0</strong></span>
             </div>
             <div class="cal-grid" style="opacity: 0.5; font-size: 11px; margin-bottom: 5px;">
@@ -920,79 +762,30 @@
     <div id="view-banks" class="view" role="region" aria-label="Bank Accounts">
         <h1 class="view-title"><i class="fas fa-university"></i> Bank Accounts</h1>
         
-        <!-- Bank List View (default) -->
-        <div id="bank-list-view">
-            <div class="stat-grid">
-                <div class="stat-card" style="background: #4A90D9;"><small><i class="fas fa-wallet"></i> Total Balance</small><h3 id="banks-total">$0</h3></div>
-                <div class="stat-card" style="background: #50C878;"><small><i class="fas fa-layer-group"></i> Accounts</small><h3 id="banks-count">0</h3></div>
-            </div>
-
-            <div class="budget-box">
-                <h3><i class="fas fa-plus-circle"></i> Add Bank Account</h3><br>
-                <input type="text" id="bank-name" placeholder="Bank name (e.g., Chase, Wells Fargo)">
-                <input type="text" id="bank-holder" placeholder="Account holder name">
-                <input type="number" id="bank-balance" placeholder="Current balance" step="0.01">
-                <select id="bank-type">
-                    <option value="checking">Checking</option>
-                    <option value="savings">Savings</option>
-                    <option value="credit">Credit Card</option>
-                    <option value="investment">Investment</option>
-                    <option value="cash">Cash</option>
-                    <option value="other">Other</option>
-                </select>
-                <textarea id="bank-notes" placeholder="Notes (Optional)" rows="2"></textarea>
-                <button class="btn-main" onclick="addBank()"><i class="fas fa-plus"></i> Add Account</button>
-            </div>
-
-            <h3 style="margin: 20px 0 10px;"><i class="fas fa-list"></i> Your Accounts</h3>
-            <div id="banks-list"></div>
+        <div class="stat-grid">
+            <div class="stat-card" style="background: #4A90D9;"><small><i class="fas fa-wallet"></i> Total Balance</small><h3 id="banks-total">$0</h3></div>
+            <div class="stat-card" style="background: #50C878;"><small><i class="fas fa-layer-group"></i> Accounts</small><h3 id="banks-count">0</h3></div>
         </div>
 
-        <!-- Bank Detail View (hidden by default) -->
-        <div id="bank-detail-view" style="display:none;">
-            <div class="folder-detail-header" id="bank-detail-header">
-                <div class="folder-detail-top">
-                    <button class="folder-back-btn" onclick="backToBankList()"><i class="fas fa-arrow-left"></i> Back to Accounts</button>
-                </div>
-                <div class="folder-detail-info">
-                    <div class="folder-detail-icon" id="bank-detail-icon"><i class="fas fa-university"></i></div>
-                    <div>
-                        <div class="folder-detail-name" id="bank-detail-name">Account Name</div>
-                        <small style="color:var(--sub-text);" id="bank-detail-type">Checking</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="folder-stat-grid" id="bank-detail-stats">
-                <div class="folder-stat-card"><small><i class="fas fa-wallet"></i> Balance</small><h4 id="bank-det-bal">$0</h4></div>
-                <div class="folder-stat-card" style="border-left: 3px solid var(--accent-green);"><small><i class="fas fa-arrow-up"></i> Income</small><h4 id="bank-det-inc" style="color:var(--accent-green);">$0</h4></div>
-                <div class="folder-stat-card" style="border-left: 3px solid var(--danger);"><small><i class="fas fa-arrow-down"></i> Expenses</small><h4 id="bank-det-exp" style="color:var(--danger);">$0</h4></div>
-            </div>
-
-            <!-- Add Transaction Form -->            <div class="folder-tx-form" id="bank-tx-form">
-                <h4><i class="fas fa-exchange-alt"></i> <span id="bank-tx-form-title">Add Transaction</span></h4>
-                <div class="form-row">
-                    <input type="text" id="bank-tx-desc" placeholder="Description (e.g., Groceries, Salary)">
-                    <input type="number" id="bank-tx-amt" placeholder="Amount" step="0.01">
-                </div>
-                <div class="form-row">
-                    <select id="bank-tx-type">
-                        <option value="expense">Expense</option>
-                        <option value="income">Income</option>
-                    </select>
-                    <input type="date" id="bank-tx-date">
-                </div>
-                <textarea id="bank-tx-note" placeholder="Notes (Optional)" rows="2"></textarea>
-                <input type="hidden" id="bank-tx-edit-id" value="">
-                <div class="btn-group">
-                    <button class="btn-icon-text primary" onclick="addBankTx()"><i class="fas fa-save"></i> <span id="bank-tx-save-btn">Save Transaction</span></button>
-                    <button class="btn-icon-text outline" onclick="cancelBankTxEdit()" id="bank-tx-cancel-btn" style="display:none;"><i class="fas fa-times"></i> Cancel</button>
-                </div>
-            </div>
-
-            <h4 style="margin:16px 0 10px;"><i class="fas fa-history"></i> Transaction History</h4>
-            <div id="bank-tx-list"></div>
+        <div class="budget-box">
+            <h3>Add Bank Account</h3><br>
+            <input type="text" id="bank-name" placeholder="Bank name (e.g., Chase, Wells Fargo)">
+            <input type="text" id="bank-holder" placeholder="Account holder name">
+            <input type="number" id="bank-balance" placeholder="Current balance" step="0.01">
+            <select id="bank-type">
+                <option value="checking">Checking</option>
+                <option value="savings">Savings</option>
+                <option value="credit">Credit Card</option>
+                <option value="investment">Investment</option>
+                <option value="cash">Cash</option>
+                <option value="other">Other</option>
+            </select>
+            <textarea id="bank-notes" placeholder="Notes (Optional)" rows="2"></textarea>
+            <button class="btn-main" onclick="addBank()">Add Account</button>
         </div>
+
+        <h3 style="margin: 20px 0 10px;">Your Accounts</h3>
+        <div id="banks-list"></div>
     </div>
 
     <!-- EMI View -->
@@ -1090,13 +883,9 @@
                 <div class="settings-section-title"><i class="fas fa-moon"></i> Theme</div>
                 <div class="setting-row">
                     <div class="setting-label">Color Mode</div>
-                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <div style="display:flex; gap:8px;">
                         <button class="btn-sm-primary" onclick="applyTheme('light')" id="theme-light-btn"><i class="fas fa-sun"></i> Light</button>
                         <button class="btn-sm-outline" onclick="applyTheme('dark')" id="theme-dark-btn"><i class="fas fa-moon"></i> Dark</button>
-                        <button class="btn-sm-outline" onclick="applyTheme('system')" id="theme-system-btn"><i class="fas fa-desktop"></i> System</button>
-                    </div>
-                    <div style="margin-top:8px; font-size:11px; color:var(--sub-text); opacity:0.8;">
-                        <i class="fas fa-info-circle"></i> "System" follows your device's theme preference
                     </div>
                 </div>
             </div>
@@ -1120,14 +909,14 @@
                         <span class="theme-badge dark"><i class="fas fa-moon"></i> Dark</span>
                     </div>
                     <div class="swatch-row" id="nav-swatches">
-                        <div class="swatch" style="background:#1e293b" onclick="updateNavColor('#1e293b', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Slate 800"></div>
-                        <div class="swatch" style="background:#0f172a" onclick="updateNavColor('#0f172a', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Slate 900"></div>
-                        <div class="swatch" style="background:#020617" onclick="updateNavColor('#020617', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Slate 950"></div>
-                        <div class="swatch" style="background:#1e1b4b" onclick="updateNavColor('#1e1b4b', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Indigo 950"></div>
-                        <div class="swatch" style="background:#0c0a09" onclick="updateNavColor('#0c0a09', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Stone 950"></div>
-                        <div class="swatch" style="background:#292524" onclick="updateNavColor('#292524', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Stone 800"></div>
-                        <div class="swatch" style="background:#881337" onclick="updateNavColor('#881337', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Rose 900"></div>
-                        <div class="swatch" style="background:#064e3b" onclick="updateNavColor('#064e3b', document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light')" title="Emerald 900"></div>
+                        <div class="swatch" style="background:#1e293b" onclick="updateNavColor('#1e293b')" title="Slate 800"></div>
+                        <div class="swatch" style="background:#0f172a" onclick="updateNavColor('#0f172a')" title="Slate 900"></div>
+                        <div class="swatch" style="background:#020617" onclick="updateNavColor('#020617')" title="Slate 950"></div>
+                        <div class="swatch" style="background:#1e1b4b" onclick="updateNavColor('#1e1b4b')" title="Indigo 950"></div>
+                        <div class="swatch" style="background:#0c0a09" onclick="updateNavColor('#0c0a09')" title="Stone 950"></div>
+                        <div class="swatch" style="background:#292524" onclick="updateNavColor('#292524')" title="Stone 800"></div>
+                        <div class="swatch" style="background:#881337" onclick="updateNavColor('#881337')" title="Rose 900"></div>
+                        <div class="swatch" style="background:#064e3b" onclick="updateNavColor('#064e3b')" title="Emerald 900"></div>
                     </div>
                 </div>
             </div>
@@ -1155,76 +944,9 @@
             </div>
 
             <div class="settings-section">
-                <div class="settings-section-title"><i class="fas fa-cloud-sun"></i> Background Suggestions</div>
-                <p style="font-size:12px; color:var(--sub-text); margin-bottom:12px;">Choose a background theme for your app. Click any suggestion to apply it instantly.</p>
-                
-                <div class="preset-grid" id="bg-suggestions-grid">
-                    <div class="preset-card" style="background: linear-gradient(135deg, #667eea, #764ba2);" onclick="applyBgSuggestion('linear-gradient(135deg, #667eea, #764ba2)')">
-                        <div class="preset-name">Cosmic</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#667eea"></div><div class="preset-color-dot" style="background:#764ba2"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);" onclick="applyBgSuggestion('linear-gradient(135deg, #f093fb, #f5576c)')">
-                        <div class="preset-name">Sunset</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#f093fb"></div><div class="preset-color-dot" style="background:#f5576c"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" onclick="applyBgSuggestion('linear-gradient(135deg, #4facfe, #00f2fe)')">
-                        <div class="preset-name">Ocean</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#4facfe"></div><div class="preset-color-dot" style="background:#00f2fe"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" onclick="applyBgSuggestion('linear-gradient(135deg, #43e97b, #38f9d7)')">
-                        <div class="preset-name">Forest</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#43e97b"></div><div class="preset-color-dot" style="background:#38f9d7"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);" onclick="applyBgSuggestion('linear-gradient(135deg, #a18cd1, #fbc2eb)')">
-                        <div class="preset-name">Lavender</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#a18cd1"></div><div class="preset-color-dot" style="background:#fbc2eb"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="applyBgSuggestion('linear-gradient(135deg, #ffecd2, #fcb69f)')">
-                        <div class="preset-name">Peach</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#ffecd2"></div><div class="preset-color-dot" style="background:#fcb69f"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);" onclick="applyBgSuggestion('linear-gradient(135deg, #89f7fe, #66a6ff)')">
-                        <div class="preset-name">Sky</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#89f7fe"></div><div class="preset-color-dot" style="background:#66a6ff"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2);" onclick="applyBgSuggestion('linear-gradient(135deg, #f5f7fa, #c3cfe2)')">
-                        <div class="preset-name">Mist</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#f5f7fa"></div><div class="preset-color-dot" style="background:#c3cfe2"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);" onclick="applyBgSuggestion('linear-gradient(135deg, #0f0c29, #302b63, #24243e)')">
-                        <div class="preset-name">Midnight</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#0f0c29"></div><div class="preset-color-dot" style="background:#302b63"></div></div>
-                        <div class="preset-badge">Dark</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);" onclick="applyBgSuggestion('linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)')">
-                        <div class="preset-name">Deep Blue</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#1a1a2e"></div><div class="preset-color-dot" style="background:#16213e"></div></div>
-                        <div class="preset-badge">Dark</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #2c3e50, #3498db);" onclick="applyBgSuggestion('linear-gradient(135deg, #2c3e50, #3498db)')">
-                        <div class="preset-name">Corporate</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#2c3e50"></div><div class="preset-color-dot" style="background:#3498db"></div></div>
-                        <div class="preset-badge">Dark</div>
-                    </div>
-                    <div class="preset-card" style="background: linear-gradient(135deg, #fc5c7d, #6a82fb);" onclick="applyBgSuggestion('linear-gradient(135deg, #fc5c7d, #6a82fb)')">
-                        <div class="preset-name">Vibrant</div>
-                        <div class="preset-colors"><div class="preset-color-dot" style="background:#fc5c7d"></div><div class="preset-color-dot" style="background:#6a82fb"></div></div>
-                        <div class="preset-badge">Gradient</div>
-                    </div>
-                </div>
-                
-                <div class="divider-text"><span>Quick Colors</span></div>
-                
+                <div class="settings-section-title"><i class="fas fa-cloud-sun"></i> Background Color</div>
                 <div class="setting-row">
-                    <div class="setting-label">Light Background</div>
+                    <div class="setting-label">Background <small>Light Mode</small></div>
                     <div class="color-picker-row">
                         <div class="color-picker-wrap">
                             <input type="color" id="custom-bg-light" value="#f0f4f8" onchange="updateBgColor(this.value, 'light')">
@@ -1243,7 +965,7 @@
                     </div>
                 </div>
                 <div class="setting-row">
-                    <div class="setting-label">Dark Background</div>
+                    <div class="setting-label">Background <small>Dark Mode</small></div>
                     <div class="color-picker-row">
                         <div class="color-picker-wrap">
                             <input type="color" id="custom-bg-dark" value="#0f172a" onchange="updateBgColor(this.value, 'dark')">
@@ -1520,6 +1242,8 @@
         </div>
     </div>
 
+</div>
+
 <script>
     // ---- Toast notification ----
     let toastTimer = null;
@@ -1599,14 +1323,8 @@
         if (e.key === 'Escape') { document.getElementById('more-dropdown')?.classList.remove('show'); }
     });
 
-    // Alias for missing renderChart reference in switch logic
-    function renderChart() {
-        renderStats();
-    }
-
     // ---- Navigation ----
     function showView(id) {
-        if(!currentUser && id !== 'auth') return;
         document.getElementById('more-dropdown')?.classList.remove('show');
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         const target = document.getElementById('view-' + id);
@@ -1623,13 +1341,12 @@
         if (renderers[id]) renderers[id]();
         
         // Update settings UI when settings view is opened
-        if(id === 'settings') {
-            renderPresets();
-            if(typeof updateSettingsUI === 'function') updateSettingsUI();
+        if(id === 'settings' && typeof updateSettingsUI === 'function') {
+            updateSettingsUI();
         }
         
         // Refresh chart if stats view
-        if(id === 'stats') {
+        if(id === 'stats' && typeof renderChart === 'function') {
             setTimeout(renderChart, 100);
         }
     }
@@ -1683,12 +1400,7 @@
         }
         
         // Apply theme first, then customizations
-        const savedTheme = data.custom.theme || data.theme;
-        const theme = savedTheme || getSystemTheme();
-        if(!savedTheme) {
-            data.custom.theme = theme;
-            data.theme = theme;
-        }
+        const theme = data.custom.theme || data.theme || 'light';
         applyTheme(theme);
         
         // Handle profile image - support both old and new format
@@ -1722,7 +1434,6 @@
     }
 
     function updateHome() {
-        if(!currentUser) return;
         const data = users[currentUser];
         let inc = 0, exp = 0;
         data.txs.forEach(t => t.type === 'income' ? inc += t.amt : exp += t.amt);
@@ -1730,8 +1441,8 @@
         // Calculate portfolio
         let totalInvested = 0, totalValue = 0;
         data.investments.forEach(inv => {
-            totalInvested += (inv.amount || 0);
-            totalValue += (inv.currentValue || 0);
+            totalInvested += inv.amount;
+            totalValue += inv.currentValue;
         });
         const portfolioGain = totalValue - totalInvested;
 
@@ -1771,7 +1482,8 @@
         gainEl.innerText = (portfolioGain >= 0 ? '+' : '') + formatCurrency(portfolioGain);
         gainEl.style.color = portfolioGain >= 0 ? '#2ecc71' : 'var(--danger)';
 
-        // Small Budget Progress bar
+        // Goal and Subscription summaries removed from Home - now in Calendar view
+        // Small Budget Progress bar (next to portfolio)
         const limit = data.budget || 1;
         const perc = Math.min((exp / limit) * 100, 100);
         document.getElementById('budget-bar').style.width = perc + '%';
@@ -1787,6 +1499,7 @@
         } else {
             const d = new Date(dateVal + 'T00:00:00');
             selectedDate = d.toLocaleDateString();
+            // Format nicely for display
             const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
             document.getElementById('selected-date-text').innerText = d.toLocaleDateString(undefined, options);
         }
@@ -1824,7 +1537,10 @@
     }
 
     function addTransactionForCalDate(dateStr) {
+        // Set the selected date using the shared date picker logic
         selectedDate = dateStr;
+        
+        // Format the display text consistently
         const parts = dateStr.split('/');
         if(parts.length === 3) {
             const d = new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
@@ -1834,14 +1550,19 @@
             document.getElementById('selected-date-text').innerText = dateStr;
         }
         document.getElementById('date-picker-input').value = '';
+        
         showView('home');
+        
+        // Focus the description input
         setTimeout(() => {
             document.getElementById('in-desc').focus();
             document.getElementById('in-desc').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300);
+        
         showToast("Adding transaction for " + dateStr);
     }
 
+    // --- Edit Transaction ---
     function editTransaction(id) {
         const data = users[currentUser];
         const tx = data.txs.find(t => t.id === id);
@@ -1854,10 +1575,12 @@
         document.getElementById('edit-note').value = tx.note || '';
         document.getElementById('edit-type').value = tx.type;
         
+        // Convert date format for date input
         const dateParts = tx.date.split('/');
         if(dateParts.length === 3) {
             document.getElementById('edit-date').value = `${dateParts[2]}-${dateParts[0].padStart(2,'0')}-${dateParts[1].padStart(2,'0')}`;
         }
+        
         updateEditFolderSelector(tx.folder);
         document.getElementById('edit-modal').classList.add('active');
     }
@@ -1872,6 +1595,8 @@
         const data = users[currentUser];
         const selector = document.getElementById('edit-folder-selector');
         selector.innerHTML = '<small style="color:var(--sub-text); width:100%;">Folder</small>';
+        
+        // None option
         const noneChip = document.createElement('div');
         noneChip.className = 'folder-chip' + (!selectedFolderId ? ' selected' : '');
         noneChip.textContent = '🚫 None';
@@ -1880,6 +1605,7 @@
             noneChip.classList.add('selected');
         };
         selector.appendChild(noneChip);
+        
         data.folders.forEach(f => {
             const chip = document.createElement('div');
             chip.className = 'folder-chip' + (selectedFolderId === f.id ? ' selected' : '');
@@ -1895,37 +1621,56 @@
 
     function saveEditTransaction() {
         if(!editingTxId) return;
+        
         const data = users[currentUser];
         const tx = data.txs.find(t => t.id === editingTxId);
         if(!tx) return;
+
         tx.desc = document.getElementById('edit-desc').value.trim();
         tx.amt = parseFloat(document.getElementById('edit-amt').value);
         tx.note = document.getElementById('edit-note').value.trim();
         tx.type = document.getElementById('edit-type').value;
+        
         const dateVal = document.getElementById('edit-date').value;
         if(dateVal) {
-            const d = new Date(dateVal + 'T00:00:00');
+            const d = new Date(dateVal);
             tx.date = d.toLocaleDateString();
         }
+        
+        // Get selected folder
         const selectedChip = document.querySelector('#edit-folder-selector .folder-chip.selected');
-        tx.folder = selectedChip?.dataset?.folderId || null;
-        if(isNaN(tx.amt) || !tx.desc) return showToast("Please enter valid description and amount");
+        const folderId = selectedChip?.dataset?.folderId || null;
+        tx.folder = folderId;
+        
+        if(isNaN(tx.amt) || !tx.desc) {
+            return showToast("Please enter valid description and amount");
+        }
+        
         save();
         closeEditModal();
-        if(currentFolderId) viewFolder(currentFolderId);
-        else showView(document.querySelector('.view.active')?.id?.replace('view-', '') || 'tx');
+        
+        // Re-render current view, preserving folder context if viewing a folder
+        if(currentFolderId) {
+            viewFolder(currentFolderId);
+        } else {
+            const activeView = document.querySelector('.view.active')?.id?.replace('view-', '');
+            if(activeView) showView(activeView);
+        }
+        
         showToast("Transaction updated!");
     }
 
+    // --- History ---
     function renderHistory() {
-        currentFolderId = null;
-        const data = users[currentUser];
+        currentFolderId = null; // Clear folder context when viewing full history
         const list = document.getElementById('history-list');
         const search = document.getElementById('search-tx').value.toLowerCase();
         list.innerHTML = '';
-        const filtered = data.txs.filter(t => t.desc.toLowerCase().includes(search)).reverse();
+        
+        const filtered = users[currentUser].txs.filter(t => t.desc.toLowerCase().includes(search)).reverse();
+
         filtered.forEach(t => {
-            const folderName = t.folder ? data.folders.find(f => f.id === t.folder)?.name : '';
+            const folderName = t.folder ? users[currentUser].folders.find(f => f.id === t.folder)?.name : '';
             list.innerHTML += `
                 <div class="tx-item">
                     <div class="tx-details">
@@ -1939,9 +1684,12 @@
                             <span onclick="deleteTx(${t.id})" style="font-size:10px; color:red; cursor:pointer;"><i class="fas fa-trash"></i></span>
                         </div>
                     </div>
-                </div>`;
+                </div>
+            `;
         });
-        if(filtered.length === 0) list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:40px;">No transactions found</p>';
+        if(filtered.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:40px;">No transactions found</p>';
+        }
     }
 
     function deleteTx(id) {
@@ -1954,48 +1702,70 @@
         }
     }
 
+    // --- Calendar ---
     function changeCalMonth(delta) {
         calendarDate.setMonth(calendarDate.getMonth() + delta);
         renderCalendar();
     }
 
     function renderCalendar() {
-        const data = users[currentUser];
         const grid = document.getElementById('cal-days');
         const now = calendarDate;
         document.getElementById('cal-title').innerText = now.toLocaleString('default', { month: 'long', year: 'numeric' });
+        
         const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
         const totalDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
         const today = new Date();
+
         grid.innerHTML = '';
         for(let i=0; i<firstDay; i++) grid.innerHTML += '<div></div>';
+        
         for(let d=1; d<=totalDays; d++) {
             const dStr = new Date(now.getFullYear(), now.getMonth(), d).toLocaleDateString();
-            const dayTxs = data.txs.filter(t => t.date === dStr);
+            const dayTxs = users[currentUser].txs.filter(t => t.date === dStr);
+            
             const hasExpense = dayTxs.some(t => t.type === 'expense');
             const hasIncome = dayTxs.some(t => t.type === 'income');
+            
             let dayClass = 'cal-day';
             if(hasExpense && hasIncome) dayClass += ' has-both';
             else if(hasExpense) dayClass += ' has-expense';
             else if(hasIncome) dayClass += ' has-income';
-            if(d === today.getDate() && now.getMonth() === today.getMonth() && now.getFullYear() === today.getFullYear()) dayClass += ' today';
-            grid.innerHTML += `<div class="${dayClass}" onclick="selectCalDate('${dStr}', ${d})">${d}</div>`;
+            
+            const isToday = d === today.getDate() && now.getMonth() === today.getMonth() && now.getFullYear() === today.getFullYear();
+            if(isToday) dayClass += ' today';
+            
+            grid.innerHTML += `
+                <div class="${dayClass}" onclick="selectCalDate('${dStr}', ${d})">
+                    ${d}
+                </div>
+            `;
         }
+        
         document.getElementById('cal-date-tx-container').style.display = 'none';
+
+        // Calculate this month's totals
         const monthTxs = data.txs.filter(t => {
             const parts = t.date.split('/');
-            return parts.length === 3 && parseInt(parts[0]) - 1 === now.getMonth() && parseInt(parts[2]) === now.getFullYear();
+            if(parts.length !== 3) return false;
+            const txMonth = parseInt(parts[0]) - 1;
+            const txYear = parseInt(parts[2]);
+            return txMonth === now.getMonth() && txYear === now.getFullYear();
         });
         const monthInc = monthTxs.filter(t => t.type === 'income').reduce((s, t) => s + t.amt, 0);
         const monthExp = monthTxs.filter(t => t.type === 'expense').reduce((s, t) => s + t.amt, 0);
         document.getElementById('cal-month-income').innerText = formatCurrency(monthInc);
         document.getElementById('cal-month-expense').innerText = formatCurrency(monthExp);
-        const net = monthInc - monthExp;
-        document.getElementById('cal-month-net').innerText = formatCurrency(net);
-        document.getElementById('cal-month-net').style.color = net >= 0 ? 'var(--accent-green)' : 'var(--danger)';
+        document.getElementById('cal-month-net').innerHTML = formatCurrency(monthInc - monthExp);
+        document.getElementById('cal-month-net').style.color = (monthInc - monthExp) >= 0 ? 'var(--accent-green)' : 'var(--danger)';
+
+        // Render Goals summary in Calendar
         renderCalGoals();
+        // Render Subscriptions summary in Calendar
         renderCalSubs();
+        // Render EMI summary in Calendar
         renderCalEmis();
+        // Render Investments summary in Calendar
         renderCalInvestments();
     }
 
@@ -2013,10 +1783,15 @@
                         <span>${getGoalIcon(g.icon)} ${g.name}</span>
                         <span>${pct.toFixed(0)}%</span>
                     </div>
-                    <div class="progress-bg" style="height:4px;"><div class="progress-fill" style="width:${pct}%; background: linear-gradient(90deg, #FFD700, #FFA500);"></div></div>
-                </div>`;
+                    <div class="progress-bg" style="height:4px;">
+                        <div class="progress-fill" style="width:${pct}%; background: linear-gradient(90deg, #FFD700, #FFA500);"></div>
+                    </div>
+                </div>
+            `;
         });
-        if(activeGoals.length === 0) listEl.innerHTML = '<p style="font-size:12px; color:var(--sub-text);">No active goals.</p>';
+        if(activeGoals.length === 0) {
+            listEl.innerHTML = '<p style="font-size:12px; color:var(--sub-text);">No active goals. Create one in Goals!</p>';
+        }
     }
 
     function renderCalSubs() {
@@ -2033,76 +1808,193 @@
         listEl.innerHTML = '';
         const subIcons = { streaming:'<i class="fas fa-film"></i>', music:'<i class="fas fa-music"></i>', software:'<i class="fas fa-laptop"></i>', gaming:'<i class="fas fa-gamepad"></i>', fitness:'<i class="fas fa-dumbbell"></i>', cloud:'<i class="fas fa-cloud"></i>', news:'<i class="fas fa-newspaper"></i>', other:'<i class="fas fa-box"></i>' };
         data.subscriptions.slice(0, 3).forEach(sub => {
-            listEl.innerHTML += `<div style="display:flex; justify-content:space-between; font-size: 12px; margin-bottom:4px;"><span>${subIcons[sub.category] || '<i class="fas fa-box"></i>'} ${sub.name}</span><span style="font-weight:600;">${formatCurrency(sub.amount)}/${sub.billing === 'yearly' ? 'yr' : 'mo'}</span></div>`;
+            listEl.innerHTML += `
+                <div style="display:flex; justify-content:space-between; font-size: 12px; margin-bottom:4px;">
+                    <span>${subIcons[sub.category] || '<i class="fas fa-box"></i>'} ${sub.name}</span>
+                    <span style="font-weight:600;">${formatCurrency(sub.amount)}/${sub.billing === 'yearly' ? 'yr' : sub.billing === 'weekly' ? 'wk' : 'mo'}</span>
+                </div>
+            `;
         });
+        if(data.subscriptions.length === 0) {
+            listEl.innerHTML = '<p style="font-size:12px; color:var(--sub-text);">No subscriptions yet. Add in Subscriptions!</p>';
+        }
     }
 
     function renderCalInvestments() {
         const data = users[currentUser];
-        const totalInvested = data.investments.reduce((s, inv) => s + (inv.amount || 0), 0);
-        const totalValue = data.investments.reduce((s, inv) => s + (inv.currentValue || 0), 0);
+        const investments = data.investments || [];
+        const totalInvested = investments.reduce((s, inv) => s + (inv.amount || 0), 0);
+        const totalValue = investments.reduce((s, inv) => s + (inv.currentValue || inv.value || 0), 0);
         const gain = totalValue - totalInvested;
-        document.getElementById('cal-invest-count').innerText = data.investments.length + ' assets';
+        
+        document.getElementById('cal-invest-count').innerText = investments.length + ' assets';
         const listEl = document.getElementById('cal-invest-list');
-        listEl.innerHTML = `<div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px;"><span>Total Inv: <strong>${formatCurrency(totalInvested)}</strong></span><span style="color:${gain >= 0 ? 'var(--accent-green)' : 'var(--danger)'};">${gain >= 0 ? '+' : ''}${formatCurrency(gain)}</span></div>`;
-        data.investments.slice(0, 4).forEach(inv => {
-            const invGain = inv.currentValue - inv.amount;
-            listEl.innerHTML += `<div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;"><span>${inv.name}</span><span style="color:${invGain >= 0 ? 'var(--accent-green)' : 'var(--danger)'};">${invGain >= 0 ? '+' : ''}${formatCurrency(invGain)}</span></div>`;
+        listEl.innerHTML = '';
+        
+        if(investments.length === 0) {
+            listEl.innerHTML = '<p style="font-size:12px; color:var(--sub-text);">No investments yet. Add some in Investments!</p>';
+            return;
+        }
+        
+        // Summary bar
+        listEl.innerHTML += `
+            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.05);">
+                <span>Total Invested: <strong>${formatCurrency(totalInvested)}</strong></span>
+                <span>Value: <strong>${formatCurrency(totalValue)}</strong></span>
+                <span style="color:${gain >= 0 ? 'var(--accent-green)' : 'var(--danger)'};">${gain >= 0 ? '+' : ''}${formatCurrency(gain)}</span>
+            </div>
+        `;
+        
+        investments.slice(0, 4).forEach(inv => {
+            const invVal = inv.currentValue || inv.value || 0;
+            const invGain = invVal - (inv.amount || 0);
+            const gainPct = inv.amount > 0 ? ((invGain / inv.amount) * 100).toFixed(1) : '0.0';
+            listEl.innerHTML += `
+                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                    <span>${inv.name || 'Unknown'}</span>
+                    <span style="color:${invGain >= 0 ? 'var(--accent-green)' : 'var(--danger)'};">
+                        ${invGain >= 0 ? '+' : ''}${formatCurrency(invGain)} (${gainPct}%)
+                    </span>
+                </div>
+            `;
         });
+        
+        if(investments.length > 4) {
+            listEl.innerHTML += `<p style="font-size:11px; color:var(--sub-text); margin-top:4px;">...and ${investments.length - 4} more</p>`;
+        }
     }
 
     function renderCalEmis() {
         const data = users[currentUser];
-        const totalEmi = data.emis.reduce((s, e) => s + e.amount, 0);
+        let totalEmi = 0;
+        data.emis.forEach(emi => { totalEmi += emi.amount; });
         document.getElementById('cal-emi-total').innerText = formatCurrency(totalEmi) + '/mo';
         const listEl = document.getElementById('cal-emi-list');
         listEl.innerHTML = '';
+        const emiIconsCal = { home:'<i class="fas fa-home"></i>', car:'<i class="fas fa-car"></i>', education:'<i class="fas fa-graduation-cap"></i>', personal:'<i class="fas fa-user"></i>', 'credit-card':'<i class="fas fa-credit-card"></i>', other:'<i class="fas fa-box"></i>' };
         data.emis.slice(0, 3).forEach(emi => {
-            listEl.innerHTML += `<div style="display:flex; justify-content:space-between; font-size: 12px; margin-bottom:4px;"><span>${emi.name}</span><span style="font-weight:600;">${formatCurrency(emi.amount)}/mo</span></div>`;
+            const progress = emi.tenure > 0 ? Math.min((emi.paid / emi.tenure) * 100, 100) : 0;
+            listEl.innerHTML += `
+                <div style="margin-bottom: 8px;">
+                    <div style="display:flex; justify-content:space-between; font-size: 12px;">
+                        <span>${emiIconsCal[emi.category] || '<i class="fas fa-box"></i>'} ${emi.name}</span>
+                        <span style="font-weight:600;">${formatCurrency(emi.amount)}/mo</span>
+                    </div>
+                    ${emi.tenure > 0 ? `<div class="progress-bg" style="height:3px;"><div class="progress-fill" style="width:${progress}%; background: linear-gradient(90deg, #FF8C00, #20B2AA);"></div></div>` : ''}
+                </div>
+            `;
         });
+        if(data.emis.length === 0) {
+            listEl.innerHTML = '<p style="font-size:12px; color:var(--sub-text);">No EMIs yet. Add in Monthly EMI!</p>';
+        }
     }
 
     function selectCalDate(fullDate, dayNum) {
         const data = users[currentUser];
         const dayTxs = data.txs.filter(t => t.date === fullDate);
+        
         const container = document.getElementById('cal-date-tx-container');
-        document.getElementById('cal-date-title').textContent = `Transactions for ${fullDate}`;
-        let inc = 0, exp = 0;
-        dayTxs.forEach(t => t.type === 'income' ? inc += t.amt : exp += t.amt);
-        document.getElementById('cal-date-total').innerHTML = `<span style="color:var(--accent-green,#2ecc71);">+${formatCurrency(inc)}</span> <span style="color:var(--accent-purple,var(--danger));">-${formatCurrency(exp)}</span>`;
+        const titleEl = document.getElementById('cal-date-title');
+        const totalEl = document.getElementById('cal-date-total');
         const listEl = document.getElementById('cal-date-tx-list');
+        
+        titleEl.textContent = `Transactions for ${fullDate}`;
+        
+        let totalInc = 0, totalExp = 0;
+        dayTxs.forEach(t => {
+            if(t.type === 'income') totalInc += t.amt;
+            else totalExp += t.amt;
+        });
+        
+        totalEl.innerHTML = `
+            <span style="color:#2ecc71;">+${formatCurrency(totalInc)}</span> 
+            <span style="color:var(--danger);">-${formatCurrency(totalExp)}</span>
+        `;
+        
         listEl.innerHTML = '';
         dayTxs.forEach(t => {
-            listEl.innerHTML += `<div class="tx-item"><div class="tx-details"><strong>${t.desc}</strong></div><div class="tx-amt ${t.type==='expense'?'neg':'pos'}">${t.type==='expense'?'-':'+'}${formatCurrency(t.amt)}</div></div>`;
+            const folderName = t.folder ? data.folders.find(f => f.id === t.folder)?.name : '';
+            listEl.innerHTML += `
+                <div class="tx-item">
+                    <div class="tx-details">
+                        <strong>${t.desc}</strong><br>
+                        <small>${t.note || ''} ${folderName ? '<i class="fas fa-folder"></i> ' + folderName : ''}</small>
+                    </div>
+                    <div class="tx-amt ${t.type==='expense'?'neg':'pos'}">
+                        ${t.type==='expense'?'-':'+'}${formatCurrency(t.amt)}
+                        <div style="display:flex; gap:8px; margin-top:4px;">
+                            <span onclick="editTransaction(${t.id})" style="font-size:10px; color:var(--accent-purple); cursor:pointer;"><i class="fas fa-edit"></i></span>
+                            <span onclick="deleteTx(${t.id})" style="font-size:10px; color:red; cursor:pointer;"><i class="fas fa-trash"></i></span>
+                        </div>
+                    </div>
+                </div>
+            `;
         });
-        listEl.innerHTML += `<div style="margin-top:12px;"><button onclick="addTransactionForCalDate('${fullDate}')" style="width:100%; padding:10px; border-radius:8px; border:2px dashed var(--primary); background:transparent; color:var(--primary); cursor:pointer;"><i class="fas fa-plus"></i> Add Entry</button></div>`;
+        
+        if(dayTxs.length === 0) {
+            listEl.innerHTML = '<p class="date-tx-empty">No transactions on this day</p>';
+        }
+        
+        // Add Transaction button for this date
+        listEl.innerHTML += `
+            <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(0,0,0,0.05);">
+                <button onclick="addTransactionForCalDate('${fullDate}')" style="width:100%; padding:12px; border-radius:12px; border:2px dashed var(--primary); background:transparent; color:var(--primary); font-weight:600; font-size:13px; cursor:pointer; font-family:inherit; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px;"
+                    onmouseover="this.style.background='rgba(37,99,235,0.05)'" onmouseout="this.style.background='transparent'">
+                    <i class="fas fa-plus-circle"></i> Add Transaction for ${fullDate}
+                </button>
+            </div>
+        `;
+        
         container.style.display = 'block';
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    // --- Stats ---
     function renderStats() {
-        if(!currentUser || typeof Chart === 'undefined') return;
+        if(typeof Chart === 'undefined') { showToast('Charts loading...'); return; }
         const ctx = document.getElementById('mainChart').getContext('2d');
         let inc = 0, exp = 0;
         users[currentUser].txs.forEach(t => t.type === 'income' ? inc += t.amt : exp += t.amt);
-        if(chartInstance) chartInstance.destroy();
-        var chartCustom = getCustom();
+
+        if(chartInstance) chartInstance.destroy();        var chartCustom = getCustom();
+        var chartIncColor = chartCustom.chartInc || '#2ecc71';
+        var chartExpColor = chartCustom.chartExp || '#e74c3c';
         chartInstance = new Chart(ctx, {
             type: 'doughnut',
-            data: { labels: ['Income', 'Expense'], datasets: [{ data: [inc, exp], backgroundColor: [chartCustom.chartInc || '#2ecc71', chartCustom.chartExp || '#e74c3c'], borderWidth: 0 }] },
+            data: { labels: ['Income', 'Expense'], datasets: [{ data: [inc, exp], backgroundColor: [chartIncColor, chartExpColor], borderWidth: 0 }] },
             options: { cutout: '75%', plugins: { legend: { position: 'bottom' } } }
         });
+
         document.getElementById('stat-avg').innerText = formatCurrency(exp / 30);
         document.getElementById('stat-count').innerText = users[currentUser].txs.length;
     }
 
+    // --- Investment Functions ---
     function addInvestment() {
         const name = document.getElementById('invest-name').value.trim();
         const type = document.getElementById('invest-type').value;
         const amount = parseFloat(document.getElementById('invest-amount').value);
         const currentValue = parseFloat(document.getElementById('invest-value').value);
-        if(!name || isNaN(amount)) return showToast("Enter name and amount");
-        users[currentUser].investments.push({ id: Date.now(), name, type, amount, currentValue, date: document.getElementById('invest-date').value });
+        const date = document.getElementById('invest-date').value;
+        const notes = document.getElementById('invest-notes').value.trim();
+
+        if(!name || isNaN(amount) || isNaN(currentValue)) {
+            return showToast("Please enter name, amount invested, and current value");
+        }
+
+        const newInvestment = {
+            id: Date.now(), name, type, amount, currentValue,
+            date: date || new Date().toISOString().split('T')[0], notes
+        };
+
+        users[currentUser].investments.push(newInvestment);
         save();
+
+        document.getElementById('invest-name').value = '';
+        document.getElementById('invest-amount').value = '';
+        document.getElementById('invest-value').value = '';
+        document.getElementById('invest-notes').value = '';
+
         renderInvestments();
         showToast("Investment added!");
     }
@@ -2110,349 +2002,839 @@
     function renderInvestments() {
         const data = users[currentUser];
         const list = document.getElementById('invest-list');
+        
+        let totalInvested = 0, totalValue = 0;
+        data.investments.forEach(inv => {
+            totalInvested += inv.amount;
+            totalValue += inv.currentValue;
+        });
+
+        const gain = totalValue - totalInvested;
+        const returnPct = totalInvested > 0 ? ((gain / totalInvested) * 100) : 0;
+
+        document.getElementById('invest-total-invested').innerText = formatCurrency(totalInvested);
+        document.getElementById('invest-total-value').innerText = formatCurrency(totalValue);
+        document.getElementById('invest-gain').innerText = (gain >= 0 ? '+' : '') + formatCurrency(gain);
+        document.getElementById('invest-gain').style.color = gain >= 0 ? '#2ecc71' : 'var(--danger)';
+        document.getElementById('invest-return-pct').innerText = returnPct.toFixed(2) + '%';
+        document.getElementById('invest-count').innerText = data.investments.length;
+
         list.innerHTML = '';
         data.investments.forEach(inv => {
             const gain = inv.currentValue - inv.amount;
-            list.innerHTML += `<div class="invest-item"><div class="invest-item-header"><strong>${inv.name}</strong><span class="invest-type-badge">${inv.type}</span></div><div class="invest-amounts"><div>Inv: ${formatCurrency(inv.amount)}</div><div>Val: ${formatCurrency(inv.currentValue)}</div></div><div style="color:${gain>=0?'#2ecc71':'red'}; margin-top:5px;">Gain: ${formatCurrency(gain)}</div><button class="btn-small btn-danger" onclick="deleteInvestment(${inv.id})">Delete</button></div>`;
+            const returnPct = inv.amount > 0 ? ((gain / inv.amount) * 100).toFixed(2) : '0.00';
+            const gainColor = gain >= 0 ? '#2ecc71' : 'var(--danger)';
+            const gainIcon = gain >= 0 ? '<i class="fas fa-arrow-up" style="color:#2ecc71"></i>' : '<i class="fas fa-arrow-down" style="color:var(--danger)"></i>';
+            
+            list.innerHTML += `
+                <div class="invest-item">
+                    <div class="invest-item-header">
+                        <strong>${inv.name}</strong>
+                        <span class="invest-type-badge">${inv.type}</span>
+                    </div>
+                    <div style="font-size:12px; color:var(--sub-text);">
+                        ${inv.date}${inv.notes ? ' • ' + inv.notes : ''}
+                    </div>
+                    <div class="invest-amounts">
+                        <div><small style="color:var(--sub-text);">Invested</small><br><strong>${formatCurrency(inv.amount)}</strong></div>
+                        <div style="text-align:right;"><small style="color:var(--sub-text);">Current Value</small><br><strong>${formatCurrency(inv.currentValue)}</strong></div>
+                    </div>
+                    <div style="text-align:right; margin-top:5px;">
+                        <span style="color:${gainColor}; font-weight:600; font-size:13px;">
+                            ${gainIcon} ${gain >= 0 ? '+' : ''}${formatCurrency(gain)} (${returnPct}%)
+                        </span>
+                    </div>
+                    <div class="invest-actions">
+                        <button class="btn-small" onclick="editInvestment(${inv.id})"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn-small btn-danger" onclick="deleteInvestment(${inv.id})"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            `;
         });
-        const totalInv = data.investments.reduce((s, i) => s + i.amount, 0);
-        const totalVal = data.investments.reduce((s, i) => s + i.currentValue, 0);
-        document.getElementById('invest-total-invested').innerText = formatCurrency(totalInv);
-        document.getElementById('invest-total-value').innerText = formatCurrency(totalVal);
+
+        if(data.investments.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:30px;">No investments yet. Add your first one above!</p>';
+        }
+    }
+
+    function editInvestment(id) {
+        const data = users[currentUser];
+        const inv = data.investments.find(i => i.id === id);
+        if(!inv) return;
+
+        const newName = prompt("Investment name:", inv.name);
+        if(newName === null) return;
+        const newAmount = prompt("Amount invested:", inv.amount);
+        if(newAmount === null) return;
+        const newValue = prompt("Current value:", inv.currentValue);
+        if(newValue === null) return;
+
+        inv.name = newName || inv.name;
+        inv.amount = parseFloat(newAmount) || inv.amount;
+        inv.currentValue = parseFloat(newValue) || inv.currentValue;
+
+        save();
+        renderInvestments();
     }
 
     function deleteInvestment(id) {
-        users[currentUser].investments = users[currentUser].investments.filter(i => i.id !== id);
-        save(); renderInvestments();
+        if(confirm("Delete this investment?")) {
+            users[currentUser].investments = users[currentUser].investments.filter(i => i.id !== id);
+            save();
+            renderInvestments();
+        }
     }
 
+    // --- Goal Functions ---
     function addGoal() {
         const name = document.getElementById('goal-name').value.trim();
         const target = parseFloat(document.getElementById('goal-target').value);
-        if(!name || isNaN(target)) return showToast("Enter valid details");
-        users[currentUser].goals.push({ id: Date.now(), name, target, saved: parseFloat(document.getElementById('goal-saved').value) || 0, icon: document.getElementById('goal-icon').value });
-        save(); renderGoals(); showToast("Goal saved");
+        const saved = parseFloat(document.getElementById('goal-saved').value) || 0;
+        const deadline = document.getElementById('goal-deadline').value;
+        const icon = document.getElementById('goal-icon').value;
+        const notes = document.getElementById('goal-notes').value.trim();
+
+        if(!name || isNaN(target) || target <= 0) {
+            return showToast("Please enter goal name and a valid target amount");
+        }
+
+        const newGoal = {
+            id: Date.now(), name, target, saved,
+            deadline: deadline || null, icon, notes,
+            createdAt: new Date().toISOString()
+        };
+
+        users[currentUser].goals.push(newGoal);
+        save();
+
+        document.getElementById('goal-name').value = '';
+        document.getElementById('goal-target').value = '';
+        document.getElementById('goal-saved').value = '0';
+        document.getElementById('goal-notes').value = '';
+
+        renderGoals();
+        showToast("Goal created!");
     }
 
     function renderGoals() {
         const data = users[currentUser];
         const list = document.getElementById('goals-list');
+
+        let totalSaved = 0, totalTarget = 0, completedCount = 0;
+        data.goals.forEach(g => {
+            totalSaved += g.saved;
+            totalTarget += g.target;
+            if(g.saved >= g.target) completedCount++;
+        });
+
+        const overallPct = totalTarget > 0 ? Math.min((totalSaved / totalTarget) * 100, 100) : 0;
+
+        document.getElementById('goals-total-saved').innerText = formatCurrency(totalSaved);
+        document.getElementById('goals-total-target').innerText = formatCurrency(totalTarget);
+        document.getElementById('goals-overall-pct').innerText = overallPct.toFixed(1) + '%';
+        document.getElementById('goals-overall-bar').style.width = overallPct + '%';
+        document.getElementById('goals-count').innerText = data.goals.length;
+        document.getElementById('goals-completed').innerText = completedCount;
+
         list.innerHTML = '';
         data.goals.forEach(g => {
             const pct = Math.min((g.saved / g.target) * 100, 100);
-            list.innerHTML += `<div class="goal-item"><strong>${getGoalIcon(g.icon)} ${g.name}</strong><div class="goal-progress-bar"><div class="goal-progress-fill" style="width:${pct}%; background:#2ecc71;"></div></div><div class="goal-stats"><span>${formatCurrency(g.saved)} / ${formatCurrency(g.target)}</span><span>${pct.toFixed(0)}%</span></div><button class="btn-small" onclick="addMoneyToGoal(${g.id})">Add Money</button><button class="btn-small btn-danger" onclick="deleteGoal(${g.id})">Delete</button></div>`;
+            const remaining = g.target - g.saved;
+            const isComplete = g.saved >= g.target;
+            
+            let deadlineText = '';
+            if(g.deadline) {
+                const daysLeft = Math.ceil((new Date(g.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+                deadlineText = daysLeft > 0 ? `${daysLeft} days left` : daysLeft === 0 ? 'Due today' : 'Overdue';
+            }
+
+            let progressBarColor = 'linear-gradient(90deg, #FFD700, #FFA500)';
+            if(isComplete) progressBarColor = 'linear-gradient(90deg, #2ecc71, #27ae60)';
+            else if(pct > 70) progressBarColor = 'linear-gradient(90deg, #FFD700, #2ecc71)';
+
+            list.innerHTML += `
+                <div class="goal-item" style="${isComplete ? 'opacity: 0.7;' : ''}">
+                    <div class="goal-header">
+                        <strong>${getGoalIcon(g.icon)} ${g.name}</strong>
+                        ${isComplete ? '<span style="color:#2ecc71; font-weight:700;"><i class="fas fa-check-circle"></i> Complete</span>' : ''}
+                    </div>
+                    <div class="goal-progress-bar">
+                        <div class="goal-progress-fill" style="width:${pct}%; background:${progressBarColor};"></div>
+                    </div>
+                    <div class="goal-stats">
+                        <span>${formatCurrency(g.saved)} saved</span>
+                        <span>${pct.toFixed(0)}% of ${formatCurrency(g.target)}</span>
+                    </div>
+                    <div class="goal-stats" style="margin-top:5px;">
+                        <span>${deadlineText ? '<i class="fas fa-calendar-alt"></i> ' + deadlineText : ''}</span>
+                        <span>${isComplete ? 'Goal achieved!' : formatCurrency(Math.max(remaining, 0)) + ' to go'}</span>
+                    </div>
+                    ${g.notes ? `<div style="font-size:11px; color:var(--sub-text); margin-top:5px;">${g.notes}</div>` : ''}
+                    <div class="goal-actions">
+                        ${!isComplete ? `<button class="btn-small" onclick="addMoneyToGoal(${g.id})"><i class="fas fa-plus-circle"></i> Add Money</button>` : ''}
+                        <button class="btn-small" onclick="editGoal(${g.id})"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn-small btn-danger" onclick="deleteGoal(${g.id})"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            `;
         });
+
+        if(data.goals.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:30px;">No goals yet. Create your first goal above!</p>';
+        }
     }
 
     function addMoneyToGoal(id) {
-        const goal = users[currentUser].goals.find(g => g.id === id);
-        const amt = prompt("Amount to add:");
-        if(amt) { goal.saved += parseFloat(amt); save(); renderGoals(); }
+        const data = users[currentUser];
+        const goal = data.goals.find(g => g.id === id);
+        if(!goal) return;
+
+        const amount = prompt(`How much would you like to add to "${goal.name}"?`, '');
+        if(amount === null || isNaN(parseFloat(amount))) return;
+
+        const addAmount = parseFloat(amount);
+        if(addAmount <= 0) return alert("Please enter a positive amount");
+
+        goal.saved += addAmount;
+        save();
+        renderGoals();            if(goal.saved >= goal.target) {
+                alert(`\u{1F3C6} Congratulations! You've reached your "${goal.name}" goal!`);
+            }
+    }
+
+    function editGoal(id) {
+        const data = users[currentUser];
+        const goal = data.goals.find(g => g.id === id);
+        if(!goal) return;
+
+        const newName = prompt("Goal name:", goal.name);
+        if(newName === null) return;
+        const newTarget = prompt("Target amount:", goal.target);
+        if(newTarget === null) return;
+        const newSaved = prompt("Amount saved:", goal.saved);
+        if(newSaved === null) return;
+
+        goal.name = newName || goal.name;
+        goal.target = parseFloat(newTarget) || goal.target;
+        goal.saved = parseFloat(newSaved) || goal.saved;
+
+        save();
+        renderGoals();
     }
 
     function deleteGoal(id) {
-        users[currentUser].goals = users[currentUser].goals.filter(g => g.id !== id);
-        save(); renderGoals();
+        if(confirm("Delete this goal?")) {
+            users[currentUser].goals = users[currentUser].goals.filter(g => g.id !== id);
+            save();
+            renderGoals();
+        }
     }
 
+    // --- Subscription Functions ---
     function addSubscription() {
         const name = document.getElementById('sub-name').value.trim();
         const amount = parseFloat(document.getElementById('sub-amount').value);
-        if(!name || isNaN(amount)) return showToast("Enter name and amount");
-        users[currentUser].subscriptions.push({ id: Date.now(), name, amount, billing: document.getElementById('sub-billing').value, category: document.getElementById('sub-category').value });
-        save(); renderSubscriptions(); showToast("Subscription added");
+        const billing = document.getElementById('sub-billing').value;
+        const category = document.getElementById('sub-category').value;
+        const startDate = document.getElementById('sub-start-date').value;
+        const notes = document.getElementById('sub-notes').value.trim();
+
+        if(!name || isNaN(amount) || amount <= 0) {
+            return showToast("Please enter service name and valid monthly cost");
+        }
+
+        const newSub = {
+            id: Date.now(), name, amount, billing, category,
+            startDate: startDate || new Date().toISOString().split('T')[0],
+            notes, createdAt: new Date().toISOString()
+        };
+
+        users[currentUser].subscriptions.push(newSub);
+        save();
+
+        document.getElementById('sub-name').value = '';
+        document.getElementById('sub-amount').value = '';
+        document.getElementById('sub-notes').value = '';
+
+        renderSubscriptions();
+        showToast("Subscription added!");
     }
 
     function renderSubscriptions() {
         const data = users[currentUser];
         const list = document.getElementById('subs-list');
-        list.innerHTML = '';
-        data.subscriptions.forEach(s => {
-            list.innerHTML += `<div class="sub-item"><div class="sub-info"><strong>${s.name}</strong></div><div class="sub-amount">${formatCurrency(s.amount)}</div><button class="btn-small btn-danger" onclick="deleteSubscription(${s.id})">Delete</button></div>`;
+
+        let monthlyTotal = 0;
+        const subIcons = { streaming:'<i class="fas fa-film"></i>', music:'<i class="fas fa-music"></i>', software:'<i class="fas fa-laptop"></i>', gaming:'<i class="fas fa-gamepad"></i>', fitness:'<i class="fas fa-dumbbell"></i>', cloud:'<i class="fas fa-cloud"></i>', news:'<i class="fas fa-newspaper"></i>', other:'<i class="fas fa-box"></i>' };
+
+        data.subscriptions.forEach(sub => {
+            const amt = sub.amount || 0;
+            if(sub.billing === 'yearly') monthlyTotal += amt / 12;
+            else if(sub.billing === 'weekly') monthlyTotal += amt * 4;
+            else monthlyTotal += amt;
         });
+
+        const yearlyTotal = monthlyTotal * 12;
+        const budgetPct = data.budget > 0 ? ((monthlyTotal / data.budget) * 100) : 0;
+
+        document.getElementById('subs-monthly-total').innerText = formatCurrency(monthlyTotal);
+        document.getElementById('subs-yearly-total').innerText = formatCurrency(yearlyTotal);
+        document.getElementById('subs-budget-pct').innerText = budgetPct.toFixed(1) + '% of budget';
+        document.getElementById('subs-budget-bar').style.width = Math.min(budgetPct, 100) + '%';
+
+        list.innerHTML = '';
+        data.subscriptions.forEach(sub => {
+            const billingLabel = sub.billing === 'yearly' ? '/year' : sub.billing === 'weekly' ? '/week' : '/month';
+            list.innerHTML += `
+                <div class="sub-item">
+                    <div class="sub-info">
+                        <span class="sub-icon">${subIcons[sub.category] || '<i class="fas fa-box"></i>'}</span>
+                        <div class="sub-details">
+                            <strong>${sub.name}</strong>
+                            <small>Billed ${sub.billing} • Since ${sub.startDate}</small>
+                            ${sub.notes ? `<br><small>${sub.notes}</small>` : ''}
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div class="sub-amount">${formatCurrency(sub.amount)}</div>
+                        <small style="color:var(--sub-text);">${billingLabel}</small>
+                        <div class="sub-actions">
+                            <span onclick="editSubscription(${sub.id})" style="font-size:11px; color:var(--accent-purple); cursor:pointer;"><i class="fas fa-edit"></i></span>
+                            <span onclick="deleteSubscription(${sub.id})" style="font-size:11px; color:red; cursor:pointer;"><i class="fas fa-trash"></i></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        if(data.subscriptions.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:30px;">No subscriptions yet. Add your first one above!</p>';
+        }
+    }
+
+    function editSubscription(id) {
+        const data = users[currentUser];
+        const sub = data.subscriptions.find(s => s.id === id);
+        if(!sub) return;
+
+        const newName = prompt("Service name:", sub.name);
+        if(newName === null) return;
+        const newAmount = prompt("Monthly cost:", sub.amount);
+        if(newAmount === null) return;
+
+        sub.name = newName || sub.name;
+        sub.amount = parseFloat(newAmount) || sub.amount;
+
+        save();
+        renderSubscriptions();
     }
 
     function deleteSubscription(id) {
-        users[currentUser].subscriptions = users[currentUser].subscriptions.filter(s => s.id !== id);
-        save(); renderSubscriptions();
+        if(confirm("Delete this subscription?")) {
+            users[currentUser].subscriptions = users[currentUser].subscriptions.filter(s => s.id !== id);
+            save();
+            renderSubscriptions();
+        }
     }
 
+    // --- Folder Functions ---
     function addFolder() {
         const name = document.getElementById('folder-name').value.trim();
-        if(!name) return showToast("Enter name");
-        users[currentUser].folders.push({ id: Date.now().toString(), name, icon: document.getElementById('folder-icon').value, type: document.getElementById('folder-type').value });
-        save(); renderFolders(); updateFolderSelector();
+        const icon = document.getElementById('folder-icon').value;
+        const type = document.getElementById('folder-type')?.value || 'personal';
+
+        if(!name) return showToast("Please enter a folder name");
+
+        const newFolder = {
+            id: Date.now(), name, icon, type,
+            createdAt: new Date().toISOString()
+        };
+
+        users[currentUser].folders.push(newFolder);
+        save();
+
+        document.getElementById('folder-name').value = '';
+        renderFolders();
+        updateFolderSelector();
+        showToast("Folder created!");
     }
 
     function renderFolders() {
         const data = users[currentUser];
         const list = document.getElementById('folders-list');
+
         list.innerHTML = '';
         data.folders.forEach(f => {
-            list.innerHTML += `<div class="folder-item" onclick="viewFolder('${f.id}')"><span>${f.name}</span><button class="btn-small btn-danger" onclick="event.stopPropagation(); deleteFolder('${f.id}')">Delete</button></div>`;
+            const txCount = data.txs.filter(t => t.folder === f.id).length;
+            const totalSpent = data.txs.filter(t => t.folder === f.id && t.type === 'expense').reduce((sum, t) => sum + t.amt, 0);
+            const totalIncome = data.txs.filter(t => t.folder === f.id && t.type === 'income').reduce((sum, t) => sum + t.amt, 0);
+            
+            const typeLabels = { personal: '<i class="fas fa-user"></i> Personal', business: '<i class="fas fa-briefcase"></i> Business', shared: '<i class="fas fa-users"></i> Shared', archived: '<i class="fas fa-archive"></i> Archived' };
+            list.innerHTML += `
+                <div class="folder-item" onclick="viewFolder('${f.id}')">
+                    <div class="folder-info">
+                        <span class="folder-icon">${f.icon}</span>
+                        <div>
+                            <strong>${f.name}</strong>
+                            <div class="folder-count">${txCount} transactions · <span class="folder-type-tag">${typeLabels[f.type] || 'Personal'}</span></div>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:12px; color:var(--danger);">-${formatCurrency(totalSpent)}</div>
+                        <div style="font-size:12px; color:var(--accent-green);">+${formatCurrency(totalIncome)}</div>
+                        <span onclick="event.stopPropagation(); deleteFolder('${f.id}')" style="font-size:11px; color:var(--danger); cursor:pointer;"><i class="fas fa-trash"></i></span>
+                    </div>
+                </div>
+            `;
+        });
+
+        if(data.folders.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:30px;">No folders yet. Create your first folder above!</p>';
+        }
+    }
+
+    function viewFolder(folderId) {
+        currentFolderId = folderId;
+        const data = users[currentUser];
+        const folder = data.folders.find(f => f.id === folderId);
+        if(!folder) return;
+
+        const folderTxs = data.txs.filter(t => t.folder === folderId).reverse();
+        
+        const totalSpent = folderTxs.filter(t => t.type === 'expense').reduce((s, t) => s + t.amt, 0);
+        const totalIncome = folderTxs.filter(t => t.type === 'income').reduce((s, t) => s + t.amt, 0);
+        
+        const list = document.getElementById('history-list');
+        
+        let html = `
+            <!-- Back button -->
+            <div style="margin-bottom:12px;">
+                <button class="folder-back-btn" onclick="showView('folders')">
+                    <i class="fas fa-arrow-left"></i> Back to Folders
+                </button>
+            </div>
+            
+            <!-- Folder Header -->
+            <div class="folder-detail-header">
+                <div class="folder-detail-top">
+                    <div class="folder-detail-info">
+                        <span class="folder-detail-icon">${getFolderIcon(folder.icon)}</span>
+                        <div>
+                            <div class="folder-detail-name">${folder.name}</div>
+                            <span class="folder-type-tag">${getFolderTypeLabel(folder.type)}</span>
+                        </div>
+                    </div>
+                    <div class="folder-detail-actions">
+                        <button class="btn-icon" onclick="openEditFolderModal('${folder.id}')" title="Edit folder"><i class="fas fa-pen"></i></button>
+                        <button class="btn-icon danger" onclick="deleteFolder('${folder.id}')" title="Delete folder"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="folder-stat-grid">
+                <div class="folder-stat-card">
+                    <small>Transactions</small>
+                    <h4>${folderTxs.length}</h4>
+                </div>
+                <div class="folder-stat-card">
+                    <small>Total Spent</small>
+                    <h4 style="color:var(--danger);">${formatCurrency(totalSpent)}</h4>
+                </div>
+                <div class="folder-stat-card">
+                    <small>Total Income</small>
+                    <h4 style="color:var(--accent-green);">${formatCurrency(totalIncome)}</h4>
+                </div>
+            </div>
+            
+            <!-- Add Transaction Form -->
+            <div class="folder-tx-form">
+                <h4><i class="fas fa-plus-circle" style="color:var(--primary);"></i> Add Transaction to "${folder.name}"</h4>
+                <input type="text" id="folder-tx-desc" placeholder="What is this for?">
+                <div class="form-row">
+                    <input type="number" id="folder-tx-amt" placeholder="Amount">
+                    <select id="folder-tx-type">
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                </div>
+                <textarea id="folder-tx-note" placeholder="Notes (Optional)" rows="2"></textarea>
+                <button class="btn-main" onclick="addFolderTransaction()"><i class="fas fa-save"></i> Add to Folder</button>
+            </div>
+        `;
+        
+        if(folderTxs.length === 0) {
+            html += `
+                <div class="empty-folder-state">
+                    <div class="empty-folder-state-icon"><i class="fas fa-inbox"></i></div>
+                    <div style="font-size:16px; font-weight:700; color:var(--text); margin-bottom:4px;">No transactions yet</div>
+                    <div style="font-size:13px;">Add your first transaction to this folder using the form above.</div>
+                </div>
+            `;
+        } else {
+            html += '<h4 style="margin:16px 0 10px; font-size:14px;"><i class="fas fa-list"></i> Transactions</h4>';
+            folderTxs.forEach(t => {
+                html += `
+                    <div class="tx-item">
+                        <div class="tx-details">
+                            <strong>${escapeHtml(t.desc)}</strong><br>
+                            <small>${t.date} ${t.note ? '• ' + escapeHtml(t.note) : ''}</small>
+                        </div>
+                        <div class="tx-amt ${t.type==='expense'?'neg':'pos'}">
+                            ${t.type==='expense'?'-':'+'}${formatCurrency(t.amt)}
+                            <div style="display:flex; gap:8px; margin-top:4px; justify-content:flex-end;">
+                                <span onclick="editTransaction(${t.id})" style="font-size:10px; color:var(--accent-purple); cursor:pointer;" title="Edit"><i class="fas fa-edit"></i></span>
+                                <span onclick="deleteTx(${t.id})" style="font-size:10px; color:red; cursor:pointer;" title="Delete"><i class="fas fa-trash"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        list.innerHTML = html;
+        showView('tx');
+    }
+    
+    function getFolderIcon(icon) {
+        const icons = {
+            food: '<i class="fas fa-utensils"></i>',
+            transport: '<i class="fas fa-car"></i>',
+            shopping: '<i class="fas fa-shopping-bag"></i>',
+            entertainment: '<i class="fas fa-film"></i>',
+            health: '<i class="fas fa-heartbeat"></i>',
+            education: '<i class="fas fa-graduation-cap"></i>',
+            travel: '<i class="fas fa-plane"></i>',
+            home: '<i class="fas fa-home"></i>',
+            savings: '<i class="fas fa-piggy-bank"></i>',
+            business: '<i class="fas fa-briefcase"></i>',
+            gifts: '<i class="fas fa-gift"></i>',
+            general: '<i class="fas fa-folder"></i>'
+        };
+        return icons[icon] || '<i class="fas fa-folder"></i>';
+    }
+    
+    function getFolderTypeLabel(type) {
+        const labels = { 
+            personal: '<i class="fas fa-user"></i> Personal', 
+            business: '<i class="fas fa-briefcase"></i> Business', 
+            shared: '<i class="fas fa-users"></i> Shared', 
+            archived: '<i class="fas fa-archive"></i> Archived' 
+        };
+        return labels[type] || 'Personal';
+    }
+    
+    function escapeHtml(str) {
+        if(!str) return '';
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    
+    function addFolderTransaction() {
+        const desc = document.getElementById('folder-tx-desc').value.trim();
+        const amt = parseFloat(document.getElementById('folder-tx-amt').value);
+        const type = document.getElementById('folder-tx-type').value;
+        const note = document.getElementById('folder-tx-note').value.trim();
+        
+        if(!desc || isNaN(amt)) return showToast("Enter valid description and amount");
+        
+        const newTx = { 
+            id: Date.now(), desc, amt, type, note, 
+            date: new Date().toLocaleDateString(), 
+            folder: currentFolderId
+        };
+        
+        if(!users[currentUser].txs) users[currentUser].txs = [];
+        users[currentUser].txs.push(newTx);
+        save();
+        
+        document.getElementById('folder-tx-desc').value = '';
+        document.getElementById('folder-tx-amt').value = '';
+        document.getElementById('folder-tx-note').value = '';
+        
+        // Refresh folder view
+        viewFolder(currentFolderId);
+        updateHome();
+        showToast("Transaction added to folder!");
+    }    function deleteFolder(id) {
+        if(confirm("Delete this folder? Transactions will not be deleted, just unassigned.")) {
+            users[currentUser].txs.forEach(t => {
+                if(t.folder === id) t.folder = null;
+            });
+            users[currentUser].folders = users[currentUser].folders.filter(f => f.id !== id);
+            save();
+            renderFolders();
+            updateFolderSelector();
+            // If we're viewing this folder, go back
+            if(currentFolderId === id) {
+                currentFolderId = null;
+                showView('folders');
+            }
+        }
+    }
+    
+    function openEditFolderModal(folderId) {
+        const data = users[currentUser];
+        const folder = data.folders.find(f => f.id === folderId);
+        if(!folder) return;
+        
+        document.getElementById('edit-folder-id').value = folderId;
+        document.getElementById('edit-folder-name').value = folder.name;
+        document.getElementById('edit-folder-icon').value = folder.icon;
+        document.getElementById('edit-folder-type').value = folder.type || 'personal';
+        document.getElementById('edit-folder-modal').classList.add('active');
+    }
+    
+    function closeEditFolderModal(e) {
+        if(e && e.target !== e.currentTarget) return;
+        document.getElementById('edit-folder-modal').classList.remove('active');
+    }
+    
+    function saveEditFolder() {
+        const folderId = document.getElementById('edit-folder-id').value;
+        const data = users[currentUser];
+        const folder = data.folders.find(f => f.id === folderId);
+        if(!folder) return;
+        
+        const name = document.getElementById('edit-folder-name').value.trim();
+        const icon = document.getElementById('edit-folder-icon').value;
+        const type = document.getElementById('edit-folder-type').value;
+        
+        if(!name) return showToast("Please enter a folder name");
+        
+        folder.name = name;
+        folder.icon = icon;
+        folder.type = type;
+        save();
+        
+        closeEditFolderModal();
+        
+        if(currentFolderId === folderId) {
+            viewFolder(folderId);
+        }
+        renderFolders();
+        updateFolderSelector();
+        
+        showToast("Folder updated!");
+    }
+
+    function updateFolderSelector() {
+        const data = users[currentUser];
+        const selector = document.getElementById('tx-folder-selector');
+        selector.innerHTML = '';
+        
+        // None option
+        const noneChip = document.createElement('div');
+        noneChip.className = 'folder-chip' + (!selectedFolder ? ' selected' : '');
+        noneChip.textContent = '🚫 None';
+        noneChip.onclick = () => {
+            selectedFolder = null;
+            selector.querySelectorAll('.folder-chip').forEach(c => c.classList.remove('selected'));
+            noneChip.classList.add('selected');
+        };
+        selector.appendChild(noneChip);
+        
+        data.folders.forEach(f => {
+            const chip = document.createElement('div');
+            chip.className = 'folder-chip' + (selectedFolder === f.id ? ' selected' : '');
+            chip.textContent = f.icon + ' ' + f.name;
+            chip.onclick = () => {
+                selectedFolder = f.id;
+                selector.querySelectorAll('.folder-chip').forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+            };
+            selector.appendChild(chip);
         });
     }
 
+    // --- Bank Account Functions ---
     function addBank() {
         const name = document.getElementById('bank-name').value.trim();
-        const bal = parseFloat(document.getElementById('bank-balance').value);
-        if(!name || isNaN(bal)) return showToast('Enter name and balance');
-        users[currentUser].banks.push({ 
-            id: Date.now(), name, balance: bal, 
-            type: document.getElementById('bank-type').value,
-            holder: document.getElementById('bank-holder').value.trim(),
-            notes: document.getElementById('bank-notes').value.trim(),
-            transactions: [],
+        const holder = document.getElementById('bank-holder').value.trim();
+        const balance = parseFloat(document.getElementById('bank-balance').value);
+        const type = document.getElementById('bank-type').value;
+        const notes = document.getElementById('bank-notes').value.trim();
+
+        if(!name || isNaN(balance)) {
+            return showToast("Please enter bank name and valid balance");
+        }
+
+        const newBank = {
+            id: Date.now(), name, holder: holder || 'Main', balance, type, notes,
             createdAt: new Date().toISOString()
-        });
+        };
+
+        users[currentUser].banks.push(newBank);
+        save();
+
         document.getElementById('bank-name').value = '';
-        document.getElementById('bank-balance').value = '';
         document.getElementById('bank-holder').value = '';
+        document.getElementById('bank-balance').value = '';
         document.getElementById('bank-notes').value = '';
-        save(); renderBanks();
-        showToast('Account added!');
+
+        renderBanks();
+        showToast("Bank account added!");
     }
 
     function renderBanks() {
         const data = users[currentUser];
         const list = document.getElementById('banks-list');
-        list.innerHTML = '';
+
         let totalBalance = 0;
+        const typeIcons = { checking:'<i class="fas fa-money-check"></i>', savings:'<i class="fas fa-piggy-bank"></i>', credit:'<i class="fas fa-credit-card"></i>', investment:'<i class="fas fa-chart-line"></i>', cash:'<i class="fas fa-money-bill-wave"></i>', other:'<i class="fas fa-box"></i>' };
+        const typeColors = { checking:'#4A90D9', savings:'#50C878', credit:'#FF6B6B', investment:'#9B59B6', cash:'#F39C12', other:'#95A5A6' };
+
         data.banks.forEach(b => { totalBalance += b.balance; });
+
         document.getElementById('banks-total').innerText = formatCurrency(totalBalance);
         document.getElementById('banks-count').innerText = data.banks.length;
-        
-        if(data.banks.length === 0) {
-            list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🏦</div><div class="empty-state-title">No Accounts Yet</div><p style="font-size:13px; color:var(--sub-text);">Add your first bank account above</p></div>';
-            return;
-        }
-        
+
+        list.innerHTML = '';
         data.banks.slice().reverse().forEach(b => {
-            const txCount = (b.transactions || []).length;
-            const inc = (b.transactions || []).filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
-            const exp = (b.transactions || []).filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
             list.innerHTML += `
-                <div class="folder-item" onclick="showBankDetail(${b.id})">
-                    <div class="folder-info">
-                        <div class="folder-icon">${b.type === 'savings' ? '🏦' : b.type === 'credit' ? '💳' : b.type === 'investment' ? '📈' : b.type === 'cash' ? '💵' : '🏛️'}</div>
-                        <div>
-                            <strong>${escapeHtml(b.name)}</strong>
-                            <div class="folder-count">${b.type} · ${txCount} transaction${txCount !== 1 ? 's' : ''}</div>
-                        </div>
+                <div class="invest-item">
+                    <div class="invest-item-header">
+                        <strong style="font-size:16px;">${typeIcons[b.type] || '<i class="fas fa-university"></i>'} ${b.name}</strong>
+                        <span style="font-size:14px; font-weight:700; color:${b.balance >= 0 ? 'var(--accent-green)' : 'var(--danger)'};">${formatCurrency(b.balance)}</span>
                     </div>
-                    <div style="text-align:right;">
-                        <div style="font-weight:700; font-size:16px;">${formatCurrency(b.balance)}</div>
-                        <div style="font-size:11px;">
-                            ${inc > 0 ? `<span style="color:var(--accent-green);">+${formatCurrency(inc)}</span> ` : ''}
-                            ${exp > 0 ? `<span style="color:var(--danger);">-${formatCurrency(exp)}</span>` : ''}
-                        </div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--sub-text);">
+                        <span><i class="fas fa-user"></i> ${b.holder || 'Main'}</span>
+                        <span style="padding:2px 10px; border-radius:6px; background:${typeColors[b.type] || '#95A5A6'}20; color:${typeColors[b.type] || '#95A5A6'}; font-weight:600;">${b.type}</span>
                     </div>
-                </div>`;
+                    ${b.notes ? `<div style="font-size:11px; color:var(--sub-text); margin-top:4px;">${b.notes}</div>` : ''}
+                    <div class="invest-actions">
+                        <button class="btn-small btn-danger" onclick="deleteBank(${b.id})"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            `;
         });
+
+        if(data.banks.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:30px;">No bank accounts yet. Add your first account above!</p>';
+        }
     }
 
     function deleteBank(id) {
-        if(!confirm('Delete this bank account and all its transactions?')) return;
-        users[currentUser].banks = users[currentUser].banks.filter(b => b.id !== id);
-        save(); 
-        if(document.getElementById('bank-detail-view').style.display !== 'none') {
-            backToBankList();
-        } else {
+        if(confirm("Delete this bank account?")) {
+            users[currentUser].banks = users[currentUser].banks.filter(b => b.id !== id);
+            save();
             renderBanks();
         }
-        showToast('Account deleted');
     }
 
-    // ---- Bank Detail View ----
-    let currentBankId = null;
-
-    function showBankDetail(id) {
-        currentBankId = id;
-        const bank = users[currentUser].banks.find(b => b.id === id);
-        if(!bank) return;
-        
-        document.getElementById('bank-list-view').style.display = 'none';
-        document.getElementById('bank-detail-view').style.display = 'block';
-        document.getElementById('bank-detail-name').innerText = bank.name;
-        document.getElementById('bank-detail-type').innerText = bank.type + (bank.holder ? ' · ' + bank.holder : '');
-        
-        renderBankDetail(bank);
-    }
-
-    function backToBankList() {
-        currentBankId = null;
-        document.getElementById('bank-list-view').style.display = 'block';
-        document.getElementById('bank-detail-view').style.display = 'none';
-        document.getElementById('bank-tx-edit-id').value = '';
-        document.getElementById('bank-tx-cancel-btn').style.display = 'none';
-        document.getElementById('bank-tx-save-btn').innerText = 'Save Transaction';
-        renderBanks();
-    }
-
-    function renderBankDetail(bank) {
-        const tx = bank.transactions || [];
-        const inc = tx.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
-        const exp = tx.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
-        
-        document.getElementById('bank-det-bal').innerText = formatCurrency(bank.balance);
-        document.getElementById('bank-det-inc').innerText = formatCurrency(inc);
-        document.getElementById('bank-det-exp').innerText = formatCurrency(exp);
-        
-        const list = document.getElementById('bank-tx-list');
-        list.innerHTML = '';
-        
-        if(tx.length === 0) {
-            list.innerHTML = '<div class="empty-folder-state"><div class="empty-folder-state-icon">📭</div><div style="font-weight:600;">No transactions yet</div><p style="font-size:13px;color:var(--sub-text);">Add income or expense transactions above</p></div>';
-            return;
-        }
-        
-        tx.slice().reverse().forEach(t => {
-            const dateStr = t.date ? new Date(t.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-            list.innerHTML += `
-                <div class="tx-item">
-                    <div class="tx-details">
-                        <strong>${escapeHtml(t.desc)}</strong>
-                        <small>${dateStr}${t.note ? ' · ' + escapeHtml(t.note) : ''}</small>
-                    </div>
-                    <div style="text-align:right;">
-                        <div class="tx-amt ${t.type === 'income' ? 'pos' : 'neg'}">${t.type === 'income' ? '+' : '-'}${formatCurrency(t.amount)}</div>
-                        <div style="display:flex; gap:6px; margin-top:4px; justify-content:flex-end;">
-                            <button class="btn-icon" onclick="editBankTx(${bank.id}, ${t.id})" title="Edit"><i class="fas fa-pen"></i></button>
-                            <button class="btn-icon danger" onclick="deleteBankTx(${bank.id}, ${t.id})" title="Delete"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>`;
-        });
-    }
-
-    function addBankTx() {
-        if(!currentBankId) return;
-        const bank = users[currentUser].banks.find(b => b.id === currentBankId);
-        if(!bank) return;
-        
-        const desc = document.getElementById('bank-tx-desc').value.trim();
-        const amt = parseFloat(document.getElementById('bank-tx-amt').value);
-        const type = document.getElementById('bank-tx-type').value;
-        const date = document.getElementById('bank-tx-date').value;
-        const note = document.getElementById('bank-tx-note').value.trim();
-        const editId = document.getElementById('bank-tx-edit-id').value;
-        
-        if(!desc || isNaN(amt) || amt <= 0) return showToast('Enter description and valid amount');
-        
-        if(!bank.transactions) bank.transactions = [];
-        
-        if(editId) {
-            // Edit existing transaction
-            const idx = bank.transactions.findIndex(t => t.id == editId);
-            if(idx !== -1) {
-                const oldAmt = bank.transactions[idx].amount;
-                const oldType = bank.transactions[idx].type;
-                // Reverse old balance effect
-                bank.balance += oldType === 'income' ? -oldAmt : oldAmt;
-                // Update transaction
-                bank.transactions[idx] = { ...bank.transactions[idx], desc, amount: amt, type, date, note };
-                // Apply new balance effect
-                bank.balance += type === 'income' ? amt : -amt;
-            }
-            document.getElementById('bank-tx-edit-id').value = '';
-            document.getElementById('bank-tx-cancel-btn').style.display = 'none';
-            document.getElementById('bank-tx-save-btn').innerText = 'Save Transaction';
-            showToast('Transaction updated!');
-        } else {
-            // New transaction
-            bank.transactions.push({ id: Date.now(), desc, amount: amt, type, date, note });
-            bank.balance += type === 'income' ? amt : -amt;
-            showToast('Transaction added!');
-        }
-        
-        // Clear form
-        document.getElementById('bank-tx-desc').value = '';
-        document.getElementById('bank-tx-amt').value = '';
-        document.getElementById('bank-tx-note').value = '';
-        document.getElementById('bank-tx-date').value = new Date().toISOString().split('T')[0];
-        
-        save();
-        renderBankDetail(bank);
-        renderBanks();
-    }
-
-    function editBankTx(bankId, txId) {
-        const bank = users[currentUser].banks.find(b => b.id === bankId);
-        if(!bank) return;
-        const tx = (bank.transactions || []).find(t => t.id === txId);
-        if(!tx) return;
-        
-        document.getElementById('bank-tx-desc').value = tx.desc;
-        document.getElementById('bank-tx-amt').value = tx.amount;
-        document.getElementById('bank-tx-type').value = tx.type;
-        document.getElementById('bank-tx-date').value = tx.date || '';
-        document.getElementById('bank-tx-note').value = tx.note || '';
-        document.getElementById('bank-tx-edit-id').value = txId;
-        document.getElementById('bank-tx-cancel-btn').style.display = 'inline-flex';
-        document.getElementById('bank-tx-save-btn').innerText = 'Update Transaction';
-        document.getElementById('bank-tx-form-title').innerText = 'Edit Transaction';
-        
-        document.getElementById('bank-tx-desc').focus();
-        
-        // Close dropdown if open
-        document.getElementById('more-dropdown').classList.remove('show');
-    }
-
-    function deleteBankTx(bankId, txId) {
-        if(!confirm('Delete this transaction?')) return;
-        const bank = users[currentUser].banks.find(b => b.id === bankId);
-        if(!bank) return;
-        const tx = (bank.transactions || []).find(t => t.id === txId);
-        if(!tx) return;
-        
-        bank.balance += tx.type === 'income' ? -tx.amount : tx.amount;
-        bank.transactions = bank.transactions.filter(t => t.id !== txId);
-        save();
-        renderBankDetail(bank);
-        renderBanks();
-        showToast('Transaction deleted');
-    }
-
-    function cancelBankTxEdit() {
-        document.getElementById('bank-tx-edit-id').value = '';
-        document.getElementById('bank-tx-cancel-btn').style.display = 'none';
-        document.getElementById('bank-tx-save-btn').innerText = 'Save Transaction';
-        document.getElementById('bank-tx-form-title').innerText = 'Add Transaction';
-        document.getElementById('bank-tx-desc').value = '';
-        document.getElementById('bank-tx-amt').value = '';
-        document.getElementById('bank-tx-note').value = '';
-        document.getElementById('bank-tx-date').value = new Date().toISOString().split('T')[0];
-    }
-
-    function escapeHtml(str) {
-        if(!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-
+    // --- EMI Functions ---
     function addEmi() {
         const name = document.getElementById('emi-name').value.trim();
-        const amt = parseFloat(document.getElementById('emi-amount').value);
-        if(!name || isNaN(amt)) return showToast("Enter details");
-        users[currentUser].emis.push({ id: Date.now(), name, amount: amt, tenure: parseInt(document.getElementById('emi-tenure').value), paid: parseInt(document.getElementById('emi-paid').value), category: document.getElementById('emi-category').value });
-        save(); renderEmis();
+        const amount = parseFloat(document.getElementById('emi-amount').value);
+        const totalAmount = parseFloat(document.getElementById('emi-total-amount').value) || 0;
+        const startDate = document.getElementById('emi-start-date').value;
+        const tenure = parseInt(document.getElementById('emi-tenure').value) || 0;
+        const paid = parseInt(document.getElementById('emi-paid').value) || 0;
+        const category = document.getElementById('emi-category').value;
+        const notes = document.getElementById('emi-notes').value.trim();
+
+        if(!name || isNaN(amount) || amount <= 0) {
+            return showToast("Please enter EMI name and valid monthly amount");
+        }
+
+        const newEmi = {
+            id: Date.now(), name, amount, totalAmount, startDate: startDate || new Date().toISOString().split('T')[0],
+            tenure, paid, category, notes, createdAt: new Date().toISOString()
+        };
+
+        users[currentUser].emis.push(newEmi);
+        save();
+
+        document.getElementById('emi-name').value = '';
+        document.getElementById('emi-amount').value = '';
+        document.getElementById('emi-total-amount').value = '';
+        document.getElementById('emi-paid').value = '0';
+        document.getElementById('emi-notes').value = '';
+
+        renderEmis();
+        showToast("EMI added!");
     }
 
     function renderEmis() {
         const data = users[currentUser];
         const list = document.getElementById('emi-list');
-        list.innerHTML = '';
-        data.emis.forEach(e => {
-            list.innerHTML += `<div class="goal-item"><strong>${e.name}</strong><div>${formatCurrency(e.amount)}/mo</div><button class="btn-small btn-danger" onclick="deleteEmi(${e.id})">Delete</button></div>`;
+
+        let totalEmi = 0;
+        let activeCount = 0;
+        const emiIcons = { home:'<i class="fas fa-home"></i>', car:'<i class="fas fa-car"></i>', education:'<i class="fas fa-graduation-cap"></i>', personal:'<i class="fas fa-user"></i>', 'credit-card':'<i class="fas fa-credit-card"></i>', other:'<i class="fas fa-box"></i>' };
+
+        data.emis.forEach(emi => {
+            totalEmi += emi.amount;
+            if(emi.tenure === 0 || emi.paid < emi.tenure) activeCount++;
         });
+
+        document.getElementById('emi-total').innerText = formatCurrency(totalEmi);
+        document.getElementById('emi-count').innerText = activeCount;
+
+        list.innerHTML = '';
+        data.emis.sort((a, b) => b.createdAt - a.createdAt);
+
+        data.emis.forEach(emi => {
+            const remainingMonths = emi.tenure > 0 ? Math.max(emi.tenure - emi.paid, 0) : 'Ongoing';
+            const progressPct = emi.tenure > 0 ? Math.min((emi.paid / emi.tenure) * 100, 100) : 0;
+            const totalPaid = emi.amount * emi.paid;
+            const isComplete = emi.tenure > 0 && emi.paid >= emi.tenure;
+
+            list.innerHTML += `
+                <div class="goal-item" style="${isComplete ? 'opacity: 0.7;' : ''}">
+                    <div class="goal-header">
+                        <strong>${emiIcons[emi.category] || '<i class="fas fa-box"></i>'} ${emi.name}</strong>
+                        ${isComplete ? '<span style="color:#2ecc71; font-weight:700;"><i class="fas fa-check-circle"></i> Completed</span>' : ''}
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin:8px 0;">
+                        <span style="font-weight:700; font-size:16px; color:var(--danger);">${formatCurrency(emi.amount)}<span style="font-size:11px; color:var(--sub-text);">/mo</span></span>
+                        <span style="font-size:13px; color:var(--sub-text);">Total: ${formatCurrency(emi.totalAmount || emi.amount * (emi.tenure || 1))}</span>
+                    </div>
+                    ${emi.tenure > 0 ? `
+                    <div class="goal-progress-bar">
+                        <div class="goal-progress-fill" style="width:${progressPct}%; background: linear-gradient(90deg, #FF8C00, #20B2AA);"></div>
+                    </div>
+                    <div class="goal-stats">
+                        <span>${emi.paid} of ${emi.tenure} months paid</span>
+                        <span>${progressPct.toFixed(0)}% done</span>
+                    </div>
+                    ` : ''}
+                    <div class="goal-stats" style="margin-top:5px;">
+                        <span><i class="fas fa-calendar-alt"></i> Started: ${emi.startDate || 'N/A'}</span>
+                        <span>${isComplete ? 'All paid!' : typeof remainingMonths === 'number' ? remainingMonths + ' months left' : 'Ongoing'}</span>
+                    </div>
+                    ${emi.notes ? `<div style="font-size:11px; color:var(--sub-text); margin-top:5px;">${emi.notes}</div>` : ''}
+                    <div class="goal-actions" style="margin-top:10px;">
+                        ${!isComplete ? `<button class="btn-small" onclick="payEmi(${emi.id})"><i class="fas fa-check-circle"></i> Pay Month</button>` : ''}
+                        <button class="btn-small btn-danger" onclick="deleteEmi(${emi.id})"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        if(data.emis.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:var(--sub-text); padding:30px;">No EMIs added yet. Add your first EMI above!</p>';
+        }
+    }
+
+    function payEmi(id) {
+        const emi = users[currentUser].emis.find(e => e.id === id);
+        if(!emi) return;
+        if(emi.tenure > 0 && emi.paid >= emi.tenure) return showToast("This EMI is already fully paid!");
+        emi.paid = (emi.paid || 0) + 1;
+        save();
+        renderEmis();
+        showToast("EMI month marked as paid!");
     }
 
     function deleteEmi(id) {
-        users[currentUser].emis = users[currentUser].emis.filter(e => e.id !== id);
-        save(); renderEmis();
+        if(confirm("Delete this EMI?")) {
+            users[currentUser].emis = users[currentUser].emis.filter(e => e.id !== id);
+            save();
+            renderEmis();
+        }
     }
 
+    // --- Settings ---
     function loadSettings() {
         const data = users[currentUser];
         document.getElementById('set-limit').value = data.budget || '';
@@ -2461,14 +2843,21 @@
 
     function saveLimit() {
         users[currentUser].budget = parseFloat(document.getElementById('set-limit').value) || 0;
-        save(); showToast("Budget updated");
+        save();
+        showToast("Budget limit updated!");
     }
 
     function saveCurrency() {
-        users[currentUser].currency = document.getElementById('set-currency').value;
-        save(); updateHome(); showToast("Currency updated");
+        const currency = document.getElementById('set-currency').value;
+        users[currentUser].currency = currency;
+        save();
+        showToast("Currency updated!");
+        updateHome();
     }
 
+    /* ---- CUSTOMIZATION SYSTEM ---- */
+
+    // Default customization values
     const DEFAULT_CUSTOM = {
         theme: 'light',
         bgColor: { light: '#f0f4f8', dark: '#0f172a' },
@@ -2480,414 +2869,1029 @@
         balanceTo: '#7c3aed',
         chartInc: '#2ecc71',
         chartExp: '#e74c3c',
-        bgSuggestion: '',
         profileImage: null,
         avatarSeed: 'Lucky',
         activePreset: null
     };
 
     function getCustom() {
-        if(!currentUser || !users[currentUser]) return JSON.parse(JSON.stringify(DEFAULT_CUSTOM));
-        var c = users[currentUser].custom;
-        if(!c) {
-            users[currentUser].custom = JSON.parse(JSON.stringify(DEFAULT_CUSTOM));
-            return users[currentUser].custom;
-        }
-        // Deep-merge missing default keys for backward compatibility
-        var defaults = DEFAULT_CUSTOM;
-        Object.keys(defaults).forEach(function(key) {
-            if(c[key] === undefined || c[key] === null) {
-                c[key] = JSON.parse(JSON.stringify(defaults[key]));
-            } else if(typeof defaults[key] === 'object' && defaults[key] !== null && !Array.isArray(defaults[key])) {
-                Object.keys(defaults[key]).forEach(function(subKey) {
-                    if(c[key][subKey] === undefined || c[key][subKey] === null) {
-                        c[key][subKey] = defaults[key][subKey];
-                    }
-                });
-            }
-        });
-        return c;
+        if(!currentUser || !users[currentUser]) return {...DEFAULT_CUSTOM};
+        if(!users[currentUser].custom) users[currentUser].custom = {...DEFAULT_CUSTOM};
+        return users[currentUser].custom;
     }
 
-    function saveCustom() { save(); }
-
-    function updateSettingsUI() {
+    function saveCustom() {
         if(!currentUser) return;
-        const custom = getCustom();
-        const theme = custom.theme || (custom.useSystemTheme ? getSystemTheme() : 'light');
-        // Update theme button active states
-        const lightBtn = document.getElementById('theme-light-btn');
-        const darkBtn = document.getElementById('theme-dark-btn');
-        const systemBtn = document.getElementById('theme-system-btn');
-        [lightBtn, darkBtn, systemBtn].forEach(btn => {
-            if(btn) btn.className = 'btn-sm-outline';
-        });
-        const savedTheme = custom.theme || 'light';
-        if(savedTheme === 'light' && lightBtn) lightBtn.className = 'btn-sm-primary';
-        else if(savedTheme === 'dark' && darkBtn) darkBtn.className = 'btn-sm-primary';
-        else if(savedTheme === 'system' && systemBtn) systemBtn.className = 'btn-sm-primary';
-
-        // Sync all color picker values
-        const syncMap = {
-            'custom-bg-light': custom.bgColor.light,
-            'custom-bg-dark': custom.bgColor.dark,
-            'custom-card-light': custom.cardColor.light,
-            'custom-card-dark': custom.cardColor.dark,
-            'custom-nav-light': custom.navColor.light,
-            'custom-nav-dark': custom.navColor.dark,
-            'custom-inc-light': custom.incColor.light,
-            'custom-inc-dark': custom.incColor.dark,
-            'custom-exp-light': custom.expColor.light,
-            'custom-exp-dark': custom.expColor.dark,
-            'custom-balance-from': custom.balanceFrom,
-            'custom-balance-to': custom.balanceTo,
-            'custom-chart-inc': custom.chartInc,
-            'custom-chart-exp': custom.chartExp
-        };
-        Object.keys(syncMap).forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.value = syncMap[id];
-        });
-        // Sync color value labels
-        const valMap = {
-            'bg-color-val-light': custom.bgColor.light,
-            'bg-color-val-dark': custom.bgColor.dark,
-            'card-color-val-light': custom.cardColor.light,
-            'card-color-val-dark': custom.cardColor.dark,
-            'nav-color-val-light': custom.navColor.light,
-            'nav-color-val-dark': custom.navColor.dark,
-            'inc-color-val-light': custom.incColor.light,
-            'inc-color-val-dark': custom.incColor.dark,
-            'exp-color-val-light': custom.expColor.light,
-            'exp-color-val-dark': custom.expColor.dark,
-            'chart-inc-val': custom.chartInc,
-            'chart-exp-val': custom.chartExp
-        };
-        Object.keys(valMap).forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.textContent = valMap[id];
-        });
-        // Sync preset active states
-        document.querySelectorAll('.preset-card').forEach(el => el.classList.remove('active'));
-        if(custom.activePreset) {
-            const activeEl = document.querySelector(`.preset-card[data-name="${custom.activePreset}"]`);
-            if(activeEl) activeEl.classList.add('active');
-        }
+        save();
     }
 
     function applyCustomization() {
         const custom = getCustom();
-        document.documentElement.setAttribute('data-theme', getEffectiveTheme(custom.theme || 'light'));
+        
+        // Apply theme
+        applyTheme(custom.theme || 'light');
+        
+        // Apply background color
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const bg = custom.bgColor ? (isDark ? custom.bgColor.dark : custom.bgColor.light) : (isDark ? '#0f172a' : '#f0f4f8');
+        const card = custom.cardColor ? (isDark ? custom.cardColor.dark : custom.cardColor.light) : (isDark ? '#1e293b' : '#ffffff');
+        const nav = custom.navColor ? (isDark ? custom.navColor.dark : custom.navColor.light) : (isDark ? '#020617' : '#1e293b');
+        const inc = custom.incColor ? (isDark ? custom.incColor.dark : custom.incColor.light) : (isDark ? '#34d399' : '#059669');
+        const exp = custom.expColor ? (isDark ? custom.expColor.dark : custom.expColor.light) : (isDark ? '#a78bfa' : '#7c3aed');
+        const balFrom = custom.balanceFrom || '#2563eb';
+        const balTo = custom.balanceTo || '#7c3aed';
+        
         const root = document.documentElement;
-        
-        // Apply ALL CSS variables
-        const bg = isDark ? custom.bgColor.dark : custom.bgColor.light;
-        const card = isDark ? custom.cardColor.dark : custom.cardColor.light;
-        const nav = isDark ? custom.navColor.dark : custom.navColor.light;
-        const inc = isDark ? custom.incColor.dark : custom.incColor.light;
-        const exp = isDark ? custom.expColor.dark : custom.expColor.light;
-        
         root.style.setProperty('--bg', bg);
         root.style.setProperty('--card', card);
         root.style.setProperty('--nav-bg', nav);
-        root.style.setProperty('--accent-green', inc);
-        root.style.setProperty('--accent-purple', exp);
-        root.style.setProperty('--custom-balance-from', custom.balanceFrom || '#2563eb');
-        root.style.setProperty('--custom-balance-to', custom.balanceTo || '#7c3aed');
         
-        // Apply balance card gradient
-        document.querySelectorAll('.balance-card').forEach(el => {
-            el.style.background = 'linear-gradient(135deg, ' + (custom.balanceFrom || '#2563eb') + ', ' + (custom.balanceTo || '#7c3aed') + ')';
+        // Apply custom income/expense colors
+        // For light mode
+        if(!isDark) {
+            root.style.setProperty('--accent-green', inc);
+            root.style.setProperty('--accent-purple', exp);
+        } else {
+            root.style.setProperty('--accent-green', inc);
+            root.style.setProperty('--accent-purple', exp);
+        }
+        
+        // Balance card
+        const balanceCards = document.querySelectorAll('.balance-card');
+        balanceCards.forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${balFrom}, ${balTo})`;
         });
         
-        // Apply income/expense stat card colors
-        document.querySelectorAll('.stat-card.inc').forEach(el => { el.style.background = inc; });
-        document.querySelectorAll('.stat-card.exp').forEach(el => { el.style.background = exp; });
+        // Sidebar active items
+        root.style.setProperty('--custom-balance-from', balFrom);
+        root.style.setProperty('--custom-balance-to', balTo);
         
-        // Apply text/sub-text colors
-        root.style.setProperty('--text', isDark ? '#f1f5f9' : '#1e293b');
-        root.style.setProperty('--sub-text', isDark ? '#94a3b8' : '#5a6b7d');
-        root.style.setProperty('--primary', isDark ? '#3b82f6' : '#2563eb');
-        root.style.setProperty('--accent-orange', isDark ? '#fbbf24' : '#d97706');
-        root.style.setProperty('--danger', isDark ? '#f87171' : '#dc2626');
-        
-        // Apply profile image
+        // Apply sidebar user avatar border
         const avatars = document.querySelectorAll('.sidebar-user-avatar, #user-img, #settings-profile-preview');
-        avatars.forEach(el => el.style.borderColor = custom.balanceFrom || '#2563eb');
+        avatars.forEach(el => el.style.borderColor = balFrom);
+        
+        // Background image
+        // Profile image
         if(custom.profileImage) {
-            avatars.forEach(el => el.src = custom.profileImage);
+            const imgEl = document.getElementById('user-img');
+            if(imgEl) imgEl.src = custom.profileImage;
+            const sidebarImg = document.getElementById('sidebar-user-img');
+            if(sidebarImg) sidebarImg.src = custom.profileImage;
         } else {
             const seed = custom.avatarSeed || 'Lucky';
-            avatars.forEach(el => el.src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + seed);
+            const url = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
+            const imgEl = document.getElementById('user-img');
+            if(imgEl && !imgEl.dataset.custom) imgEl.src = url;
+            const sidebarImg = document.getElementById('sidebar-user-img');
+            if(sidebarImg) sidebarImg.src = url;
         }
         
-        // Apply background to body (priority: bgSuggestion gradient > solid color)
-        if(custom.bgSuggestion) {
-            document.body.style.background = custom.bgSuggestion;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
-            document.body.style.backgroundRepeat = 'no-repeat';
-            document.body.style.backgroundAttachment = 'fixed';
-        } else {
-            document.body.style.background = '';
-            document.body.style.backgroundImage = 'none';
-            document.body.style.backgroundSize = '';
-            document.body.style.backgroundPosition = '';
-            document.body.style.backgroundRepeat = '';
-            document.body.style.backgroundAttachment = '';
-        }
-        
-        // Apply to sidebar logo gradient
-        document.querySelectorAll('.sidebar-logo-icon').forEach(el => {
-            el.style.background = 'linear-gradient(135deg, ' + (custom.balanceFrom || '#2563eb') + ', ' + (custom.balanceTo || '#7c3aed') + ')';
+        // Update stat card colors with contrast
+        const incCards = document.querySelectorAll('.stat-card.inc');
+        incCards.forEach(el => {
+            el.style.background = inc;
+            el.style.color = getContrastColor(inc);
+        });
+        const expCards = document.querySelectorAll('.stat-card.exp');
+        expCards.forEach(el => {
+            el.style.background = exp;
+            el.style.color = getContrastColor(exp);
         });
         
+        // Update calendar day colors (via style injection)
+        var styleTag = document.getElementById('custom-dynamic-styles');
+        if(!styleTag) {
+            styleTag = document.createElement('style');
+            styleTag.id = 'custom-dynamic-styles';
+            document.head.appendChild(styleTag);
+        }
+        styleTag.textContent = '' +
+            '.cal-day.has-income { background: ' + inc + ' !important; color: ' + getContrastColor(inc) + ' !important; }' +
+            '.cal-day.has-expense { background: ' + exp + ' !important; color: ' + getContrastColor(exp) + ' !important; }' +
+            '.cal-day.has-both { background: ' + blendColors(inc, exp, 50) + ' !important; color: #000 !important; }' +
+            '.tx-amt.pos { color: ' + inc + ' !important; }' +
+            '.tx-amt.neg { color: ' + exp + ' !important; }';
+        
+        // Update settings preview
         updateSettingsUI();
     }
-
-    function switchSettingsTab(tabId) {
-        document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
-        document.querySelector(`.settings-tab[onclick*="${tabId}"]`).classList.add('active');
-        document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
-        const panel = document.getElementById(`panel-${tabId}`);
-        if(panel) panel.classList.add('active');
-    }
-
-    function getSystemTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-
-    let systemThemeListener = null;
-
-    function getEffectiveTheme(pref) {
-        return pref === 'system' ? getSystemTheme() : pref;
+    
+    function blendColors(c1, c2, ratio) {
+        // Simple color blending for the calendar 'both' indicator
+        var r1 = parseInt(c1.slice(1,3), 16), g1 = parseInt(c1.slice(3,5), 16), b1 = parseInt(c1.slice(5,7), 16);
+        var r2 = parseInt(c2.slice(1,3), 16), g2 = parseInt(c2.slice(3,5), 16), b2 = parseInt(c2.slice(5,7), 16);
+        var r = Math.round(r1 + (r2 - r1) * ratio / 100);
+        var g = Math.round(g1 + (g2 - g1) * ratio / 100);
+        var b = Math.round(b1 + (b2 - b1) * ratio / 100);
+        return rgbToHex(r, g, b);
     }
 
     function applyTheme(t) {
-        const effective = getEffectiveTheme(t);
-        document.documentElement.setAttribute('data-theme', effective);
+        document.documentElement.setAttribute('data-theme', t);
         if(currentUser && users[currentUser]) {
             users[currentUser].theme = t;
             users[currentUser].custom = users[currentUser].custom || {...DEFAULT_CUSTOM};
             users[currentUser].custom.theme = t;
             save();
         }
-        applyCustomization();
-        // Update theme button active states
+        
+        // Update theme toggle buttons
         const lightBtn = document.getElementById('theme-light-btn');
         const darkBtn = document.getElementById('theme-dark-btn');
-        const systemBtn = document.getElementById('theme-system-btn');
-        [lightBtn, darkBtn, systemBtn].forEach(btn => {
-            if(btn) btn.className = 'btn-sm-outline';
-        });
-        if(t === 'light' && lightBtn) lightBtn.className = 'btn-sm-primary';
-        else if(t === 'dark' && darkBtn) darkBtn.className = 'btn-sm-primary';
-        else if(t === 'system' && systemBtn) systemBtn.className = 'btn-sm-primary';
-        // Update quick toggle button if it exists
-        const quickToggle = document.getElementById('theme-quick-toggle');
-        if(quickToggle) {
-            const isDark = effective === 'dark';
-            quickToggle.innerHTML = isDark
-                ? '<i class="fas fa-sun"></i> <span style="font-size:11px; font-weight:500;">Theme</span>'
-                : '<i class="fas fa-moon"></i> <span style="font-size:11px; font-weight:500;">Theme</span>';
-            quickToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-            quickToggle.title = isDark ? 'Light mode' : 'Dark mode';
+        if(lightBtn && darkBtn) {
+            if(t === 'light') {
+                lightBtn.className = 'btn-sm-primary';
+                darkBtn.className = 'btn-sm-outline';
+            } else {
+                lightBtn.className = 'btn-sm-outline';
+                darkBtn.className = 'btn-sm-primary';
+            }
         }
-        // Listen for system theme changes when 'system' mode is active
-        if(systemThemeListener) {
-            systemThemeListener.matches = false; // Flag to ignore
-            systemThemeListener();
-            systemThemeListener = null;
-        }
-        if(t === 'system') {
-            const mq = window.matchMedia('(prefers-color-scheme: dark)');
-            const handler = (e) => {
-                if(getCustom().theme === 'system') {
-                    applyTheme('system');
-                }
-            };
-            mq.addEventListener('change', handler);
-            systemThemeListener = () => mq.removeEventListener('change', handler);
-        }
+        
+        // Reapply customizations
+        applyCustomization();
     }
+
+    // ---- COLOR UPDATE FUNCTIONS ----
 
     function updateBgColor(color, mode) {
         const custom = getCustom();
+        if(!custom.bgColor) custom.bgColor = { light: '#f0f4f8', dark: '#0f172a' };
         custom.bgColor[mode] = color;
-        custom.bgSuggestion = '';
-        saveCustom(); applyCustomization();
-    }
-
-    function applyBgSuggestion(gradient) {
-        const custom = getCustom();
-        custom.bgSuggestion = gradient;
+        users[currentUser].custom = custom;
         saveCustom();
         applyCustomization();
-        showToast('Background applied!');
-    }
-
-    function updateNavColor(color, mode) {
-        const custom = getCustom();
-        custom.navColor[mode] = color;
-        saveCustom(); applyCustomization();
+        
+        // Update display value
+        document.getElementById(`bg-color-val-${mode}`).textContent = color;
     }
 
     function updateCardColor(color, mode) {
         const custom = getCustom();
+        if(!custom.cardColor) custom.cardColor = { light: '#ffffff', dark: '#1e293b' };
         custom.cardColor[mode] = color;
-        saveCustom(); applyCustomization();
+        users[currentUser].custom = custom;
+        saveCustom();
+        applyCustomization();
+        document.getElementById(`card-color-val-${mode}`).textContent = color;
+    }
+
+    function updateNavColor(color, mode) {
+        const custom = getCustom();
+        if(!custom.navColor) custom.navColor = { light: '#1e293b', dark: '#020617' };
+        if(mode) {
+            custom.navColor[mode] = color;
+            document.getElementById(`nav-color-val-${mode}`).textContent = color;
+        } else {
+            // Update both based on current theme
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            custom.navColor[isDark ? 'dark' : 'light'] = color;
+        }
+        users[currentUser].custom = custom;
+        saveCustom();
+        applyCustomization();
     }
 
     function updateIncomeColor(color, mode) {
         const custom = getCustom();
+        if(!custom.incColor) custom.incColor = { light: '#059669', dark: '#34d399' };
         custom.incColor[mode] = color;
-        saveCustom(); applyCustomization();
+        users[currentUser].custom = custom;
+        saveCustom();
+        applyCustomization();
+        document.getElementById(`inc-color-val-${mode}`).textContent = color;
     }
 
     function updateExpenseColor(color, mode) {
         const custom = getCustom();
+        if(!custom.expColor) custom.expColor = { light: '#7c3aed', dark: '#a78bfa' };
         custom.expColor[mode] = color;
-        saveCustom(); applyCustomization();
+        users[currentUser].custom = custom;
+        saveCustom();
+        applyCustomization();
+        document.getElementById(`exp-color-val-${mode}`).textContent = color;
     }
 
     function updateBalanceGradient(from, to) {
         const custom = getCustom();
-        if(!from && !to) {
-            from = document.getElementById('custom-balance-from').value;
-            to = document.getElementById('custom-balance-to').value;
+        if(from && to) {
+            custom.balanceFrom = from;
+            custom.balanceTo = to;
+        } else {
+            custom.balanceFrom = document.getElementById('custom-balance-from').value;
+            custom.balanceTo = document.getElementById('custom-balance-to').value;
         }
-        if(from) custom.balanceFrom = from;
-        if(to) custom.balanceTo = to;
-        saveCustom(); applyCustomization();
+        users[currentUser].custom = custom;
+        saveCustom();
+        applyCustomization();
     }
 
     function updateChartColors() {
         const custom = getCustom();
         custom.chartInc = document.getElementById('custom-chart-inc').value;
         custom.chartExp = document.getElementById('custom-chart-exp').value;
-        saveCustom(); renderChart();
+        users[currentUser].custom = custom;
+        saveCustom();
+        document.getElementById('chart-inc-val').textContent = custom.chartInc;
+        document.getElementById('chart-exp-val').textContent = custom.chartExp;
+        // Re-render chart if it exists
+        if(typeof renderChart === 'function' && document.getElementById('view-stats').classList.contains('active')) {
+            renderChart();
+        }
     }
 
-    function handleProfileImageUpload(event) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            getCustom().profileImage = e.target.result;
-            saveCustom(); startApp();
+            
+            // Get average color from top-left area
+            const imageData = ctx.getImageData(0, 0, 100, 100).data;
+            
+            let r = 0, g = 0, b = 0, count = 0;
+            for(let i = 0; i < imageData.length; i += 16) {
+                r += imageData[i];
+                g += imageData[i + 1];
+                b += imageData[i + 2];
+                count++;
+            }
+            
+            r = Math.round(r / count);
+            g = Math.round(g / count);
+            b = Math.round(b / count);
+            
+            const avgColor = rgbToHex(r, g, b);
+            const lightColor = rgbToHex(Math.min(255, r + 60), Math.min(255, g + 60), Math.min(255, b + 60));
+            const darkColor = rgbToHex(Math.max(0, r - 40), Math.max(0, g - 40), Math.max(0, b - 40));
+            
+            // Also get accent from center
+            const cx = 50, cy = 50;
+            const centerIdx = (cy * 100 + cx) * 4;
+            const accentR = imageData[centerIdx];
+            const accentG = imageData[centerIdx + 1];
+            const accentB = imageData[centerIdx + 2];
+            const accentColor = rgbToHex(accentR, accentG, accentB);
+            
+            // Show color suggestions
+            showAutoColorSuggestions(avgColor, lightColor, darkColor, accentColor);
         };
-        reader.readAsDataURL(event.target.files[0]);
+        img.src = dataUrl;
+    }
+
+    function rgbToHex(r, g, b) {
+        return '#' + [r, g, b].map(x => {
+            const hex = x.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }).join('');
+    }
+
+    function showAutoColorSuggestions(avg, light, dark, accent) {
+        const container = document.getElementById('auto-color-suggestions');
+        if(!container) return;
+        
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        
+        container.innerHTML = `
+            <div class="divider-text">Extracted Colors</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div onclick="quickApplyBgColor('${avg}', '${isDark ? 'dark' : 'light'}')" style="cursor:pointer;padding:12px;border-radius:12px;background:${avg};text-align:center;">
+                    <span style="font-size:11px;font-weight:600;color:${getContrastColor(avg)};">Background</span>
+                    <div style="font-size:10px;font-weight:400;color:${getContrastColor(avg)};opacity:0.8;">${avg}</div>
+                </div>
+                <div onclick="quickApplyAccentColor('${accent}')" style="cursor:pointer;padding:12px;border-radius:12px;background:${accent};text-align:center;">
+                    <span style="font-size:11px;font-weight:600;color:${getContrastColor(accent)};">Accent</span>
+                    <div style="font-size:10px;font-weight:400;color:${getContrastColor(accent)};opacity:0.8;">${accent}</div>
+                </div>
+                <div onclick="quickApplyBgColor('${light}', '${isDark ? 'dark' : 'light'}')" style="cursor:pointer;padding:12px;border-radius:12px;background:${light};text-align:center;">
+                    <span style="font-size:11px;font-weight:600;color:${getContrastColor(light)};">Light Variant</span>
+                    <div style="font-size:10px;font-weight:400;color:${getContrastColor(light)};opacity:0.8;">${light}</div>
+                </div>
+                <div onclick="quickApplyBgColor('${dark}', '${isDark ? 'dark' : 'light'}')" style="cursor:pointer;padding:12px;border-radius:12px;background:${dark};text-align:center;">
+                    <span style="font-size:11px;font-weight:600;color:${getContrastColor(dark)};">Dark Variant</span>
+                    <div style="font-size:10px;font-weight:400;color:${getContrastColor(dark)};opacity:0.8;">${dark}</div>
+                </div>
+            </div>
+            <div class="divider-text">Quick Apply</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn-sm-primary" onclick="applyExtractedTheme('${avg}','${accent}','${light}','${dark}')">
+                    <i class="fas fa-magic"></i> Apply Extracted Theme
+                </button>
+            </div>
+        `;
+    }
+
+    function getContrastColor(hex) {
+        const r = parseInt(hex.slice(1,3), 16);
+        const g = parseInt(hex.slice(3,5), 16);
+        const b = parseInt(hex.slice(5,7), 16);
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        return luminance > 0.5 ? '#000000' : '#ffffff';
+    }
+
+    function quickApplyBgColor(color, mode) {
+        document.getElementById(`custom-bg-${mode}`).value = color;
+        updateBgColor(color, mode);
+        showToast('Background color applied!');
+    }
+
+    function quickApplyAccentColor(color) {
+        document.getElementById('custom-balance-from').value = color;
+        updateBalanceGradient(color, '#8b5cf6');
+        showToast('Accent color applied!');
+    }
+
+    function applyExtractedTheme(bg, accent, lightVariant, darkVariant) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const mode = isDark ? 'dark' : 'light';
+        
+        document.getElementById(`custom-bg-${mode}`).value = bg;
+        updateBgColor(bg, mode);
+        
+        document.getElementById('custom-balance-from').value = accent;
+        document.getElementById('custom-balance-to').value = lightVariant;
+        updateBalanceGradient(accent, lightVariant);
+        
+        showToast('✨ Extracted theme applied!');
+    }
+
+    // ---- PROFILE ----
+
+    function handleProfileImageUpload(event) {
+        const file = event.target.files[0];
+        if(!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const dataUrl = e.target.result;
+            const custom = getCustom();
+            custom.profileImage = dataUrl;
+            users[currentUser].custom = custom;
+            saveCustom();
+            
+            // Apply to all profile image elements
+            document.getElementById('user-img').src = dataUrl;
+            document.getElementById('user-img').dataset.custom = 'true';
+            const sidebarImg = document.getElementById('sidebar-user-img');
+            if(sidebarImg) sidebarImg.src = dataUrl;
+            const settingsPreview = document.getElementById('settings-profile-preview');
+            if(settingsPreview) settingsPreview.src = dataUrl;
+            
+            showToast('Profile photo updated!');
+        };
+        reader.readAsDataURL(file);
+        event.target.value = '';
     }
 
     function resetProfileImage() {
-        getCustom().profileImage = null;
-        saveCustom(); startApp();
+        const custom = getCustom();
+        custom.profileImage = null;
+        custom.avatarSeed = 'Lucky';
+        users[currentUser].custom = custom;
+        saveCustom();
+        
+        const url = 'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky';
+        document.getElementById('user-img').src = url;
+        document.getElementById('user-img').dataset.custom = 'false';
+        const sidebarImg = document.getElementById('sidebar-user-img');
+        if(sidebarImg) sidebarImg.src = url;
+        const settingsPreview = document.getElementById('settings-profile-preview');
+        if(settingsPreview) settingsPreview.src = url;
+        
+        showToast('Profile photo reset');
+    }
+
+    function selectAvatarSuggestion(seed) {
+        const custom = getCustom();
+        custom.profileImage = null;
+        custom.avatarSeed = seed;
+        users[currentUser].custom = custom;
+        saveCustom();
+        
+        const url = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
+        document.getElementById('user-img').src = url;
+        document.getElementById('user-img').dataset.custom = 'false';
+        const sidebarImg = document.getElementById('sidebar-user-img');
+        if(sidebarImg) sidebarImg.src = url;
+        const settingsPreview = document.getElementById('settings-profile-preview');
+        if(settingsPreview) settingsPreview.src = url;
+        
+        // Highlight active
+        document.querySelectorAll('.avatar-suggestion').forEach(el => el.classList.remove('active'));
+        const el = document.querySelector(`.avatar-suggestion[data-seed="${seed}"]`);
+        if(el) el.classList.add('active');
+        
+        showToast('Avatar updated!');
     }
 
     function updateDisplayName(name) {
+        if(!name) return;
         document.getElementById('display-name').textContent = name;
-        save();
+        const sidebarName = document.getElementById('sidebar-user-name');
+        if(sidebarName) sidebarName.textContent = name;
+        showToast('Name updated!');
     }
 
-    function applyLightPreset(name) {
-        const p = LIGHT_PRESETS.find(x => x.name === name);
-        if(!p) return;
-        const c = getCustom();
-        c.bgColor.light = p.bg; c.cardColor.light = p.card; c.navColor.light = p.nav;
-        c.incColor.light = p.inc; c.expColor.light = p.exp;
-        c.balanceFrom = p.balFrom; c.balanceTo = p.balTo;
-        c.activePreset = name;
-        saveCustom(); applyCustomization();
-    }
-
-    function applyDarkPreset(name) {
-        const p = DARK_PRESETS.find(x => x.name === name);
-        if(!p) return;
-        const c = getCustom();
-        c.bgColor.dark = p.bg; c.cardColor.dark = p.card; c.navColor.dark = p.nav;
-        c.incColor.dark = p.inc; c.expColor.dark = p.exp;
-        c.balanceFrom = p.balFrom; c.balanceTo = p.balTo;
-        c.activePreset = name;
-        saveCustom(); applyCustomization();
-    }
+    // ---- PRESETS ----
 
     const LIGHT_PRESETS = [
-        { name: 'default', label: 'Default Light', bg: '#f0f4f8', card: '#ffffff', nav: '#1e293b', inc: '#059669', exp: '#7c3aed', balFrom: '#2563eb', balTo: '#7c3aed' },
-        { name: 'warm', label: 'Warm Glow', bg: '#fef3c7', card: '#fffbeb', nav: '#1c1917', inc: '#d97706', exp: '#dc2626', balFrom: '#f59e0b', balTo: '#ef4444' },
-        { name: 'ocean', label: 'Ocean Breeze', bg: '#ecfeff', card: '#f0fdfa', nav: '#0f172a', inc: '#0891b2', exp: '#6366f1', balFrom: '#06b6d4', balTo: '#8b5cf6' },
-        { name: 'nature', label: 'Nature Green', bg: '#f0fdf4', card: '#ffffff', nav: '#14532d', inc: '#16a34a', exp: '#d97706', balFrom: '#10b981', balTo: '#059669' },
-        { name: 'rose', label: 'Rose Garden', bg: '#fff1f2', card: '#ffffff', nav: '#4c0519', inc: '#e11d48', exp: '#9333ea', balFrom: '#f43f5e', balTo: '#a21caf' },
-        { name: 'lavender', label: 'Lavender Mist', bg: '#f5f3ff', card: '#ffffff', nav: '#1e1b4b', inc: '#7c3aed', exp: '#0891b2', balFrom: '#8b5cf6', balTo: '#06b6d4' }
+        { name: 'Clean White', bg: '#ffffff', card: '#f8fafc', nav: '#1e293b', inc: '#059669', exp: '#7c3aed', balFrom: '#2563eb', balTo: '#7c3aed', badge: 'Pure' },
+        { name: 'Soft Mint', bg: '#ecfdf5', card: '#ffffff', nav: '#064e3b', inc: '#059669', exp: '#7c3aed', balFrom: '#10b981', balTo: '#34d399', badge: 'Fresh' },
+        { name: 'Warm Peach', bg: '#fff7ed', card: '#ffffff', nav: '#431407', inc: '#059669', exp: '#dc2626', balFrom: '#f97316', balTo: '#fb923c', badge: 'Warm' },
+        { name: 'Lavender', bg: '#f5f3ff', card: '#ffffff', nav: '#1e1b4b', inc: '#7c3aed', exp: '#6d28d9', balFrom: '#8b5cf6', balTo: '#a78bfa', badge: 'Soft' },
+        { name: 'Sky Blue', bg: '#f0f9ff', card: '#ffffff', nav: '#0c4a6e', inc: '#0284c7', exp: '#6366f1', balFrom: '#0ea5e9', balTo: '#6366f1', badge: 'Airy' },
+        { name: 'Rose Gold', bg: '#fff1f2', card: '#ffffff', nav: '#4c0519', inc: '#e11d48', exp: '#d946ef', balFrom: '#f43f5e', balTo: '#d946ef', badge: 'Luxury' },
+        { name: 'Ocean Breeze', bg: '#ecfeff', card: '#ffffff', nav: '#164e63', inc: '#0d9488', exp: '#0891b2', balFrom: '#06b6d4', balTo: '#0891b2', badge: 'Calm' },
+        { name: 'Lemon Zest', bg: '#fefce8', card: '#ffffff', nav: '#3f3f46', inc: '#ca8a04', exp: '#e11d48', balFrom: '#eab308', balTo: '#f97316', badge: 'Bold' },
+        { name: 'Slate Elegance', bg: '#f8fafc', card: '#ffffff', nav: '#020617', inc: '#059669', exp: '#7c3aed', balFrom: '#334155', balTo: '#6366f1', badge: 'Modern' },
+        { name: 'Cherry Blossom', bg: '#fdf2f8', card: '#ffffff', nav: '#500724', inc: '#db2777', exp: '#e11d48', balFrom: '#ec4899', balTo: '#f43f5e', badge: 'Pretty' }
     ];
 
     const DARK_PRESETS = [
-        { name: 'default-dark', label: 'Default Dark', bg: '#0f172a', card: '#1e293b', nav: '#020617', inc: '#34d399', exp: '#a78bfa', balFrom: '#3b82f6', balTo: '#8b5cf6' },
-        { name: 'midnight', label: 'Midnight Blue', bg: '#020617', card: '#0f172a', nav: '#000000', inc: '#60a5fa', exp: '#f472b6', balFrom: '#2563eb', balTo: '#ec4899' },
-        { name: 'matrix', label: 'Matrix Green', bg: '#052e16', card: '#0f172a', nav: '#000000', inc: '#4ade80', exp: '#22d3ee', balFrom: '#10b981', balTo: '#06b6d4' },
-        { name: 'sunset-dark', label: 'Sunset Dark', bg: '#1c1917', card: '#292524', nav: '#0c0a09', inc: '#fb923c', exp: '#f87171', balFrom: '#f97316', balTo: '#ef4444' },
-        { name: 'royal', label: 'Royal Purple', bg: '#1e1b4b', card: '#2e1065', nav: '#0f0a1a', inc: '#a78bfa', exp: '#f472b6', balFrom: '#8b5cf6', balTo: '#ec4899' },
-        { name: 'cyber', label: 'Cyberpunk', bg: '#0a0a2e', card: '#1a1a3e', nav: '#000018', inc: '#22d3ee', exp: '#f43f5e', balFrom: '#06b6d4', balTo: '#e11d48' }
+        { name: 'Deep Space', bg: '#020617', card: '#1e293b', nav: '#000000', inc: '#34d399', exp: '#a78bfa', balFrom: '#3b82f6', balTo: '#a78bfa', badge: 'Pure' },
+        { name: 'Midnight Navy', bg: '#0f172a', card: '#1e293b', nav: '#020617', inc: '#60a5fa', exp: '#a78bfa', balFrom: '#3b82f6', balTo: '#818cf8', badge: 'Classic' },
+        { name: 'Forest Deep', bg: '#022c22', card: '#064e3b', nav: '#000000', inc: '#4ade80', exp: '#2dd4bf', balFrom: '#10b981', balTo: '#34d399', badge: 'Earth' },
+        { name: 'Plum Wine', bg: '#2e0f4e', card: '#3b1f6e', nav: '#1a0a2e', inc: '#c084fc', exp: '#f472b6', balFrom: '#8b5cf6', balTo: '#ec4899', badge: 'Rich' },
+        { name: 'Nordic Ice', bg: '#0f172a', card: '#1e293b', nav: '#020617', inc: '#67e8f9', exp: '#818cf8', balFrom: '#06b6d4', balTo: '#6366f1', badge: 'Cool' },
+        { name: 'Amber Glow', bg: '#1c1301', card: '#2a1f04', nav: '#0f0a00', inc: '#fbbf24', exp: '#fb923c', balFrom: '#f59e0b', balTo: '#f97316', badge: 'Warm' },
+        { name: 'Cyberpunk', bg: '#09001a', card: '#14002e', nav: '#000000', inc: '#22d3ee', exp: '#e879f9', balFrom: '#06b6d4', balTo: '#d946ef', badge: 'Neon' },
+        { name: 'Crimson Night', bg: '#1a0000', card: '#2d0000', nav: '#000000', inc: '#fca5a5', exp: '#f87171', balFrom: '#ef4444', balTo: '#f97316', badge: 'Dramatic' },
+        { name: 'Slate Storm', bg: '#0f172a', card: '#1e293b', nav: '#020617', inc: '#94a3b8', exp: '#a78bfa', balFrom: '#475569', balTo: '#6366f1', badge: 'Moody' },
+        { name: 'Copper Dark', bg: '#1c1500', card: '#2a2000', nav: '#0a0800', inc: '#fcd34d', exp: '#f59e0b', balFrom: '#b45309', balTo: '#d97706', badge: 'Vintage' }
     ];
 
     function renderPresets() {
-        // Light presets
-        const lightGrid = document.getElementById('presets-light');
-        if(lightGrid && !lightGrid.hasChildNodes()) {
-            LIGHT_PRESETS.forEach(function(p) {
-                const card = document.createElement('div');
-                card.className = 'preset-card' + (p.name === 'default' ? ' active' : '');
-                card.setAttribute('data-name', p.name);
-                card.style.background = 'linear-gradient(135deg, ' + p.balFrom + ', ' + p.balTo + ')';
-                card.innerHTML = '<div class="preset-name">' + p.label + '</div><div class="preset-colors">' +
-                    '<span class="preset-color-dot" style="background:' + p.inc + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.exp + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.bg + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.card + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.nav + '"></span>' +
-                    '</div>';
-                card.onclick = function() { applyLightPreset(p.name); };
-                lightGrid.appendChild(card);
-            });
-        }
-        // Dark presets
-        const darkGrid = document.getElementById('presets-dark');
-        if(darkGrid && !darkGrid.hasChildNodes()) {
-            DARK_PRESETS.forEach(function(p) {
-                const card = document.createElement('div');
-                card.className = 'preset-card' + (p.name === 'default-dark' ? ' active' : '');
-                card.setAttribute('data-name', p.name);
-                card.style.background = 'linear-gradient(135deg, ' + p.balFrom + ', ' + p.balTo + ')';
-                card.innerHTML = '<div class="preset-name">' + p.label + '</div><div class="preset-colors">' +
-                    '<span class="preset-color-dot" style="background:' + p.inc + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.exp + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.bg + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.card + '"></span>' +
-                    '<span class="preset-color-dot" style="background:' + p.nav + '"></span>' +
-                    '</div>';
-                card.onclick = function() { applyDarkPreset(p.name); };
-                darkGrid.appendChild(card);
-            });
-        }
-        // Update active state
         const custom = getCustom();
-        document.querySelectorAll('.preset-card').forEach(function(el) {
-            el.classList.toggle('active', el.getAttribute('data-name') === custom.activePreset);
-        });
+        
+        // Light presets
+        const lightContainer = document.getElementById('presets-light');
+        if(lightContainer) {
+            lightContainer.innerHTML = LIGHT_PRESETS.map(p => `
+                <div class="preset-card ${custom.activePreset === p.name && !document.documentElement.getAttribute('data-theme') === 'dark' ? 'active' : ''}" 
+                     style="background:linear-gradient(135deg, ${p.bg}, ${p.card})"
+                     onclick="applyLightPreset('${p.name}')">
+                    <div class="preset-name">${p.name}</div>
+                    <span class="preset-badge">${p.badge}</span>
+                    <div class="preset-colors">
+                        <span class="preset-color-dot" style="background:${p.nav}"></span>
+                        <span class="preset-color-dot" style="background:${p.inc}"></span>
+                        <span class="preset-color-dot" style="background:${p.exp}"></span>
+                        <span class="preset-color-dot" style="background:${p.balFrom}"></span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Dark presets
+        const darkContainer = document.getElementById('presets-dark');
+        if(darkContainer) {
+            darkContainer.innerHTML = DARK_PRESETS.map(p => `
+                <div class="preset-card ${custom.activePreset === p.name && document.documentElement.getAttribute('data-theme') === 'dark' ? 'active' : ''}"
+                     style="background:linear-gradient(135deg, ${p.bg}, ${p.card})"
+                     onclick="applyDarkPreset('${p.name}')">
+                    <div class="preset-name">${p.name}</div>
+                    <span class="preset-badge">${p.badge}</span>
+                    <div class="preset-colors">
+                        <span class="preset-color-dot" style="background:${p.nav}"></span>
+                        <span class="preset-color-dot" style="background:${p.inc}"></span>
+                        <span class="preset-color-dot" style="background:${p.exp}"></span>
+                        <span class="preset-color-dot" style="background:${p.balFrom}"></span>
+                    </div>
+                </div>
+            `).join('');
+        }
     }
 
-    function exportPDF() {
+    function applyLightPreset(name) {
+        const preset = LIGHT_PRESETS.find(p => p.name === name);
+        if(!preset) return;
+        
+        applyTheme('light');
+        const custom = getCustom();
+        
+        custom.bgColor = { light: preset.bg, dark: custom.bgColor?.dark || '#0f172a' };
+        custom.cardColor = { light: preset.card, dark: custom.cardColor?.dark || '#1e293b' };
+        custom.navColor = { light: preset.nav, dark: custom.navColor?.dark || '#020617' };
+        custom.incColor = { light: preset.inc, dark: custom.incColor?.dark || '#34d399' };
+        custom.expColor = { light: preset.exp, dark: custom.expColor?.dark || '#a78bfa' };
+        custom.balanceFrom = preset.balFrom;
+        custom.balanceTo = preset.balTo;
+        custom.activePreset = name;
+        
+        users[currentUser].custom = custom;
+        saveCustom();
+        
+        // Update all color pickers
+        document.getElementById('custom-bg-light').value = preset.bg;
+        document.getElementById('custom-card-light').value = preset.card;
+        document.getElementById('custom-nav-light').value = preset.nav;
+        document.getElementById('custom-inc-light').value = preset.inc;
+        document.getElementById('custom-exp-light').value = preset.exp;
+        document.getElementById('custom-balance-from').value = preset.balFrom;
+        document.getElementById('custom-balance-to').value = preset.balTo;
+        
+        document.getElementById('bg-color-val-light').textContent = preset.bg;
+        document.getElementById('card-color-val-light').textContent = preset.card;
+        document.getElementById('nav-color-val-light').textContent = preset.nav;
+        document.getElementById('inc-color-val-light').textContent = preset.inc;
+        document.getElementById('exp-color-val-light').textContent = preset.exp;
+        
+        applyCustomization();
+        renderPresets();
+        showToast(`🎨 ${name} theme applied!`);
+    }
+
+    function applyDarkPreset(name) {
+        const preset = DARK_PRESETS.find(p => p.name === name);
+        if(!preset) return;
+        
+        applyTheme('dark');
+        const custom = getCustom();
+        
+        custom.bgColor = { light: custom.bgColor?.light || '#f0f4f8', dark: preset.bg };
+        custom.cardColor = { light: custom.cardColor?.light || '#ffffff', dark: preset.card };
+        custom.navColor = { light: custom.navColor?.light || '#1e293b', dark: preset.nav };
+        custom.incColor = { light: custom.incColor?.light || '#059669', dark: preset.inc };
+        custom.expColor = { light: custom.expColor?.light || '#7c3aed', dark: preset.exp };
+        custom.balanceFrom = preset.balFrom;
+        custom.balanceTo = preset.balTo;
+        custom.activePreset = name;
+        
+        users[currentUser].custom = custom;
+        saveCustom();
+        
+        document.getElementById('custom-bg-dark').value = preset.bg;
+        document.getElementById('custom-card-dark').value = preset.card;
+        document.getElementById('custom-nav-dark').value = preset.nav;
+        document.getElementById('custom-inc-dark').value = preset.inc;
+        document.getElementById('custom-exp-dark').value = preset.exp;
+        document.getElementById('custom-balance-from').value = preset.balFrom;
+        document.getElementById('custom-balance-to').value = preset.balTo;
+        
+        document.getElementById('bg-color-val-dark').textContent = preset.bg;
+        document.getElementById('card-color-val-dark').textContent = preset.card;
+        document.getElementById('nav-color-val-dark').textContent = preset.nav;
+        document.getElementById('inc-color-val-dark').textContent = preset.inc;
+        document.getElementById('exp-color-val-dark').textContent = preset.exp;
+        
+        applyCustomization();
+        renderPresets();
+        showToast(`🌙 ${name} theme applied!`);
+    }
+
+    // ---- SETTINGS UI ----
+
+    function switchSettingsTab(tabId) {
+        // Update tabs
+        document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+        document.querySelector(`.settings-tab[onclick*="${tabId}"]`).classList.add('active');
+        
+        // Update panels
+        document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(`panel-${tabId}`).classList.add('active');
+    }
+
+    function updateSettingsUI() {
+        if(!currentUser || !users[currentUser]) return;
+        const custom = getCustom();
+        
+        // Update color pickers
+        if(document.getElementById('custom-bg-light')) {
+            document.getElementById('custom-bg-light').value = custom.bgColor?.light || '#f0f4f8';
+            document.getElementById('custom-bg-dark').value = custom.bgColor?.dark || '#0f172a';
+            document.getElementById('bg-color-val-light').textContent = custom.bgColor?.light || '#f0f4f8';
+            document.getElementById('bg-color-val-dark').textContent = custom.bgColor?.dark || '#0f172a';
+        }
+        if(document.getElementById('custom-card-light')) {
+            document.getElementById('custom-card-light').value = custom.cardColor?.light || '#ffffff';
+            document.getElementById('custom-card-dark').value = custom.cardColor?.dark || '#1e293b';
+            document.getElementById('card-color-val-light').textContent = custom.cardColor?.light || '#ffffff';
+            document.getElementById('card-color-val-dark').textContent = custom.cardColor?.dark || '#1e293b';
+        }
+        if(document.getElementById('custom-nav-light')) {
+            document.getElementById('custom-nav-light').value = custom.navColor?.light || '#1e293b';
+            document.getElementById('custom-nav-dark').value = custom.navColor?.dark || '#020617';
+            document.getElementById('nav-color-val-light').textContent = custom.navColor?.light || '#1e293b';
+            document.getElementById('nav-color-val-dark').textContent = custom.navColor?.dark || '#020617';
+        }
+        if(document.getElementById('custom-inc-light')) {
+            document.getElementById('custom-inc-light').value = custom.incColor?.light || '#059669';
+            document.getElementById('custom-inc-dark').value = custom.incColor?.dark || '#34d399';
+            document.getElementById('inc-color-val-light').textContent = custom.incColor?.light || '#059669';
+            document.getElementById('inc-color-val-dark').textContent = custom.incColor?.dark || '#34d399';
+        }
+        if(document.getElementById('custom-exp-light')) {
+            document.getElementById('custom-exp-light').value = custom.expColor?.light || '#7c3aed';
+            document.getElementById('custom-exp-dark').value = custom.expColor?.dark || '#a78bfa';
+            document.getElementById('exp-color-val-light').textContent = custom.expColor?.light || '#7c3aed';
+            document.getElementById('exp-color-val-dark').textContent = custom.expColor?.dark || '#a78bfa';
+        }
+        if(document.getElementById('custom-balance-from')) {
+            document.getElementById('custom-balance-from').value = custom.balanceFrom || '#2563eb';
+            document.getElementById('custom-balance-to').value = custom.balanceTo || '#7c3aed';
+        }
+        if(document.getElementById('custom-chart-inc')) {
+            document.getElementById('custom-chart-inc').value = custom.chartInc || '#2ecc71';
+            document.getElementById('custom-chart-exp').value = custom.chartExp || '#e74c3c';
+            document.getElementById('chart-inc-val').textContent = custom.chartInc || '#2ecc71';
+            document.getElementById('chart-exp-val').textContent = custom.chartExp || '#e74c3c';
+        }
+        
+        // Profile
+        const settingsPreview = document.getElementById('settings-profile-preview');
+        if(settingsPreview) {
+            if(custom.profileImage) {
+                settingsPreview.src = custom.profileImage;
+            } else {
+                settingsPreview.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${custom.avatarSeed || 'Lucky'}`;
+            }
+        }
+        
+        // Display name
+        const nameInput = document.getElementById('settings-display-name');
+        if(nameInput) nameInput.value = document.getElementById('display-name')?.textContent || currentUser;
+        
+        // Budget
+        const limitInput = document.getElementById('set-limit');
+        if(limitInput && users[currentUser]) limitInput.value = users[currentUser].budget || '';
+        
+        // Currency
+        const currencySelect = document.getElementById('set-currency');
+        if(currencySelect && users[currentUser]) currencySelect.value = users[currentUser].currency || '$';
+        
+        // Theme buttons
+        const theme = custom.theme || 'light';
+        const lightBtn = document.getElementById('theme-light-btn');
+        const darkBtn = document.getElementById('theme-dark-btn');
+        if(lightBtn && darkBtn) {
+            if(theme === 'light') {
+                lightBtn.className = 'btn-sm-primary';
+                darkBtn.className = 'btn-sm-outline';
+            } else {
+                lightBtn.className = 'btn-sm-outline';
+                darkBtn.className = 'btn-sm-primary';
+            }
+        }
+        
+        // Render presets
+        renderPresets();
+        
+        // Render avatar suggestions
+        renderAvatarSuggestions();
+    }
+
+    function renderAvatarSuggestions() {
+        const container = document.getElementById('avatar-suggestions');
+        if(!container) return;
+        
+        const seeds = ['Lucky', 'Mittens', 'Buddy', 'Whiskers', 'Shadow', 'Oreo', 'Simba', 'Luna', 'Charlie', 'Max', 'Bella', 'Oliver'];
+        const currentSeed = getCustom().avatarSeed || 'Lucky';
+        
+        container.innerHTML = seeds.map(seed => `
+            <div class="avatar-suggestion ${seed === currentSeed ? 'active' : ''}" data-seed="${seed}" onclick="selectAvatarSuggestion('${seed}')">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}" alt="${seed} avatar" loading="lazy">
+            </div>
+        `).join('');
+    }
+
+    async function exportPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        doc.text("Financial Report", 10, 10);
-        doc.save("Report.pdf");
+        const data = users[currentUser];
+        const cur = getCurrency();
+        
+        // Helper to check if we need a new page
+        function checkPage(y, needed = 40) {
+            if(y + needed > doc.internal.pageSize.height - 20) {
+                doc.addPage();
+                return 20;
+            }
+            return y;
+        }
+
+        // ---- TITLE PAGE ----
+        doc.setFontSize(24);
+        doc.setTextColor(37, 99, 235);
+        doc.text('Pocket Planner', 14, 20);
+        doc.setFontSize(16);
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Financial Report for ${currentUser}`, 14, 30);
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text(`Generated: ${new Date().toLocaleDateString()} | Currency: ${cur}`, 14, 38);
+        
+        // ---- FINANCIAL OVERVIEW ----
+        let yPos = 50;
+        let inc = 0, exp = 0;
+        data.txs.forEach(t => t.type === 'income' ? inc += t.amt : exp += t.amt);
+        const balance = inc - exp;
+        
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text('Financial Overview', 14, yPos);
+        yPos += 10;
+        
+        doc.setFontSize(11);
+        doc.text(`Total Balance: ${formatCurrency(balance)}`, 20, yPos); yPos += 7;
+        doc.setTextColor(46, 204, 113);
+        doc.text(`Total Income: ${formatCurrency(inc)}`, 20, yPos); yPos += 7;
+        doc.setTextColor(220, 38, 38);
+        doc.text(`Total Expenses: ${formatCurrency(exp)}`, 20, yPos); yPos += 7;
+        doc.setTextColor(0);
+        doc.text(`Monthly Budget Limit: ${formatCurrency(data.budget || 5000)}`, 20, yPos); yPos += 7;
+        if(data.budget > 0) {
+            const pct = Math.min((exp / data.budget) * 100, 100);
+            doc.text(`Budget Used: ${pct.toFixed(1)}%`, 20, yPos); yPos += 7;
+        }
+        
+        // ---- TRANSACTIONS ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Transactions (${data.txs.length} total)`, 14, yPos);
+        yPos += 8;
+        
+        if(data.txs.length > 0) {
+            const rows = data.txs.map(t => [t.date, t.desc, t.type, t.folder ? data.folders.find(f => f.id === t.folder)?.name || '' : '', formatCurrency(t.amt)]);
+            doc.autoTable({ 
+                head: [['Date', 'Description', 'Type', 'Folder', 'Amount']], 
+                body: rows, startY: yPos, headStyles: { fillColor: [0, 0, 0] },
+                styles: { fontSize: 8 },
+                columnStyles: { 1: { cellWidth: 60 } }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No transactions recorded yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- INVESTMENTS ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Investments (${(data.investments || []).length} assets)`, 14, yPos);
+        yPos += 8;
+        
+        if((data.investments || []).length > 0) {
+            const totalInv = data.investments.reduce((s, i) => s + (i.amount || 0), 0);
+            const totalVal = data.investments.reduce((s, i) => s + (i.currentValue || i.value || 0), 0);
+            const totalGain = totalVal - totalInv;
+            
+            doc.setFontSize(10);
+            doc.text(`Total Invested: ${formatCurrency(totalInv)} | Current Value: ${formatCurrency(totalVal)} | Gain/Loss: ${formatCurrency(totalGain)}`, 20, yPos);
+            yPos += 7;
+            
+            const investRows = data.investments.map(inv => [
+                inv.name, 
+                inv.type, 
+                formatCurrency(inv.amount || 0), 
+                formatCurrency(inv.currentValue || inv.value || 0), 
+                formatCurrency((inv.currentValue || inv.value || 0) - (inv.amount || 0)),
+                inv.notes || ''
+            ]);
+            doc.autoTable({
+                head: [['Name', 'Type', 'Invested', 'Value', 'Gain/Loss', 'Notes']],
+                body: investRows, startY: yPos, headStyles: { fillColor: [37, 99, 235] },
+                styles: { fontSize: 8 }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No investments recorded yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- FINANCIAL GOALS ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Financial Goals (${(data.goals || []).length} goals)`, 14, yPos);
+        yPos += 8;
+        
+        if((data.goals || []).length > 0) {
+            const goalRows = data.goals.map(g => [
+                g.name, 
+                formatCurrency(g.target), 
+                formatCurrency(g.saved), 
+                ((g.saved / g.target) * 100).toFixed(1) + '%', 
+                g.deadline || 'No deadline',
+                g.notes || ''
+            ]);
+            doc.autoTable({
+                head: [['Goal', 'Target', 'Saved', 'Progress', 'Deadline', 'Notes']],
+                body: goalRows, startY: yPos, headStyles: { fillColor: [255, 215, 0], textColor: [0, 0, 0] },
+                styles: { fontSize: 8 }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No goals set yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- SUBSCRIPTIONS ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Subscriptions (${(data.subscriptions || []).length} services)`, 14, yPos);
+        yPos += 8;
+        
+        if((data.subscriptions || []).length > 0) {
+            let monthlyTotal = 0;
+            data.subscriptions.forEach(s => {
+                const amt = s.amount || 0;
+                if(s.billing === 'yearly') monthlyTotal += amt / 12;
+                else if(s.billing === 'weekly') monthlyTotal += amt * 4;
+                else monthlyTotal += amt;
+            });
+            
+            doc.setFontSize(10);
+            doc.text(`Monthly Total: ${formatCurrency(monthlyTotal)} | Yearly Total: ${formatCurrency(monthlyTotal * 12)}`, 20, yPos);
+            yPos += 7;
+            
+            const subRows = data.subscriptions.map(s => [s.name, formatCurrency(s.amount), s.billing, s.category, s.notes || '']);
+            doc.autoTable({
+                head: [['Service', 'Amount', 'Billing', 'Category', 'Notes']],
+                body: subRows, startY: yPos, headStyles: { fillColor: [255, 107, 107] },
+                styles: { fontSize: 8 }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No subscriptions recorded yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- LOAN EMIs ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Loan EMIs (${(data.emis || []).length} loans)`, 14, yPos);
+        yPos += 8;
+        
+        if((data.emis || []).length > 0) {
+            const totalEmi = data.emis.reduce((s, e) => s + (e.amount || 0), 0);
+            const totalLoan = data.emis.reduce((s, e) => s + (e.totalAmount || 0), 0);
+            const totalPaid = data.emis.reduce((s, e) => s + (e.paid || 0) * (e.amount || 0), 0);
+            
+            doc.setFontSize(10);
+            doc.text(`Total Monthly EMI: ${formatCurrency(totalEmi)} | Total Loan Amount: ${formatCurrency(totalLoan)}`, 20, yPos);
+            yPos += 7;
+            
+            const emiRows = data.emis.map(e => [
+                e.name,
+                formatCurrency(e.amount || 0),
+                formatCurrency(e.totalAmount || 0),
+                (e.tenure || 0) + ' mo',
+                (e.paid || 0) + ' / ' + (e.tenure || 0),
+                e.notes || ''
+            ]);
+            doc.autoTable({
+                head: [['Loan', 'Monthly', 'Total', 'Tenure', 'Paid', 'Notes']],
+                body: emiRows, startY: yPos, headStyles: { fillColor: [255, 140, 0] },
+                styles: { fontSize: 8 }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No loans/EMIs recorded yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- BANK ACCOUNTS ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Bank Accounts (${(data.banks || []).length} accounts)`, 14, yPos);
+        yPos += 8;
+        
+        if((data.banks || []).length > 0) {
+            const totalBal = data.banks.reduce((s, b) => s + (b.balance || 0), 0);
+            doc.setFontSize(10);
+            doc.text(`Total Balance Across Accounts: ${formatCurrency(totalBal)}`, 20, yPos);
+            yPos += 7;
+            
+            const bankRows = data.banks.map(b => [
+                b.name,
+                b.holder || 'Main',
+                b.type,
+                formatCurrency(b.balance || 0),
+                b.notes || ''
+            ]);
+            doc.autoTable({
+                head: [['Bank', 'Holder', 'Type', 'Balance', 'Notes']],
+                body: bankRows, startY: yPos, headStyles: { fillColor: [74, 144, 217] },
+                styles: { fontSize: 8 }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No bank accounts recorded yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- FOLDERS ----
+        yPos = checkPage(yPos, 50);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text(`Folders (${(data.folders || []).length} folders)`, 14, yPos);
+        yPos += 8;
+        
+        if((data.folders || []).length > 0) {
+            const folderRows = data.folders.map(f => {
+                const txCount = data.txs.filter(t => t.folder === f.id).length;
+                const folderExp = data.txs.filter(t => t.folder === f.id && t.type === 'expense').reduce((s, t) => s + t.amt, 0);
+                const folderInc = data.txs.filter(t => t.folder === f.id && t.type === 'income').reduce((s, t) => s + t.amt, 0);
+                return [f.name, f.type || 'personal', txCount + ' txns', formatCurrency(folderExp), formatCurrency(folderInc)];
+            });
+            doc.autoTable({
+                head: [['Folder', 'Type', 'Transactions', 'Spent', 'Earned']],
+                body: folderRows, startY: yPos, headStyles: { fillColor: [139, 92, 246] },
+                styles: { fontSize: 8 }
+            });
+            yPos = doc.lastAutoTable.finalY + 12;
+        } else {
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text('No folders created yet.', 20, yPos);
+            yPos += 12;
+        }
+
+        // ---- MONTHLY BREAKDOWN (last 6 months) ----
+        yPos = checkPage(yPos, 60);
+        doc.setFontSize(14);
+        doc.setTextColor(0);
+        doc.text('Monthly Breakdown (Last 6 Months)', 14, yPos);
+        yPos += 8;
+        
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const now = new Date();
+        const monthData = [];
+        for(let m = 0; m < 6; m++) {
+            const d = new Date(now.getFullYear(), now.getMonth() - m, 1);
+            const monthTxs = data.txs.filter(t => {
+                const parts = t.date.split('/');
+                if(parts.length !== 3) return false;
+                const txMonth = parseInt(parts[0]) - 1;
+                const txYear = parseInt(parts[2]);
+                return txMonth === d.getMonth() && txYear === d.getFullYear();
+            });
+            const mInc = monthTxs.filter(t => t.type === 'income').reduce((s, t) => s + t.amt, 0);
+            const mExp = monthTxs.filter(t => t.type === 'expense').reduce((s, t) => s + t.amt, 0);
+            monthData.push([
+                monthNames[d.getMonth()] + ' ' + d.getFullYear(),
+                formatCurrency(mInc),
+                formatCurrency(mExp),
+                formatCurrency(mInc - mExp)
+            ]);
+        }
+        doc.autoTable({
+            head: [['Month', 'Income', 'Expenses', 'Net']],
+            body: monthData, startY: yPos, headStyles: { fillColor: [0, 0, 0] },
+            styles: { fontSize: 8 }
+        });
+        yPos = doc.lastAutoTable.finalY + 12;
+
+        // ---- FOOTER ----
+        yPos = checkPage(yPos, 20);
+        doc.setFontSize(9);
+        doc.setTextColor(150);
+        doc.text('Generated by Pocket Planner Pro', 14, yPos);
+        doc.text('Page ' + doc.internal.getNumberOfPages(), doc.internal.pageSize.width - 30, yPos);
+
+        doc.save('PocketPlanner_Report.pdf');
     }
 
-    // Start app on DOM ready, but defer heavy setup to let auth view paint first
-    window.addEventListener('DOMContentLoaded', () => {
-        if(currentUser && users[currentUser]) {
-            // Use requestAnimationFrame to ensure browser paints the auth/login view first
-            requestAnimationFrame(() => startApp());
+    // Avatar upload
+    document.getElementById('file-input').onchange = function(e) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            users[currentUser].avatar = reader.result;
+            document.getElementById('user-img').src = reader.result;
+            document.getElementById('user-img').dataset.custom = 'true';
+            // Also save to new customization system
+            if(users[currentUser].custom) {
+                users[currentUser].custom.profileImage = reader.result;
+            }
+            save();
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+
+    // Initialize folder selector when home view loads
+    const observer = new MutationObserver(() => {
+        if(document.getElementById('view-home').classList.contains('active')) {
+            updateFolderSelector();
         }
+    });
+    observer.observe(document.getElementById('view-home'), { attributes: true, attributeFilter: ['class'] });
+
+    // ---- Init ----
+    window.addEventListener('DOMContentLoaded', () => {
+        if(currentUser && users[currentUser]) startApp();
     });
 </script>
 </body>
-</html>
+</html>
