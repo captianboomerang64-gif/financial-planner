@@ -8,7 +8,9 @@ Pocket Planner Pro is a feature-rich, single-page personal finance web applicati
 
 ## 📸 Preview
 
-![Pocket Planner Dashboard Login Screen](Screen%20Shot%202026-10-12%20at%2017.54.15-fullpage.png)[cite: 1]
+![Pocket Planner Dashboard Login Screen]<img width="1366" height="667" alt="Screen Shot 2026-10-12 at 17 54 15-fullpage" src="https://github.com/user-attachments/assets/03f5d562-e08b-4615-a2d1-1c32170370ed" />
+<img width="1342" height="938" alt="Screen Shot 2026-10-12 at 18 03 10-fullpage" src="https://github.com/user-attachments/assets/9bf797ea-a974-4f90-8c00-3d5febaebfec" />
+
 
 ---
 
@@ -33,13 +35,13 @@ Pocket Planner Pro is a feature-rich, single-page personal finance web applicati
 
 ## 🛠️ Built With
 
-* **HTML5** & **CSS3** (with CSS Variables & Flexbox/Grid Layouts)[cite: 2]
-* **JavaScript (ES6+)**[cite: 2]
-* **Chart.js** (for graphical analytics)[cite: 2]
-* **jsPDF** & **jsPDF-AutoTable** (for PDF report generation)[cite: 2]
-* **Font Awesome 6.5.1** (for icons)[cite: 2]
-* **Google Fonts (Inter)**[cite: 2]
-* **Dicebear API** (for dynamic avatar generation)[cite: 2]
+* **HTML5** & **CSS3** (with CSS Variables & Flexbox/Grid Layouts)
+* **JavaScript (ES6+)**
+* **Chart.js** (for graphical analytics)
+* **jsPDF** & **jsPDF-AutoTable** (for PDF report generation)
+* **Font Awesome 6.5.1** (for icons)
+* **Google Fonts (Inter)**
+* **Dicebear API** (for dynamic avatar generation)
 
 ---
 
